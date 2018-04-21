@@ -1,0 +1,7 @@
+.chatbox {
+    height: 45px;
+    width: 95%;
+    border: 2px solid #BCBCBD;
+    border-radius: 5px;
+    margin: 0 auto;
+}
