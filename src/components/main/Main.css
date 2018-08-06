@@ -1,0 +1,11 @@
+.main {
+    position: relative;
+    height: 100%;
+}
+
+.chatbox {
+    position: absolute;
+    bottom: 0;
+    width:100%;
+    padding-bottom: 20px;
+}   

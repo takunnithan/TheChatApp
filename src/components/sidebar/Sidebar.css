@@ -1,0 +1,62 @@
+.sidebar {
+    text-align: left;
+    color: white;
+    position: relative;
+    height: 100%;
+    min-width: 182px;
+    color: #F8F8F8;
+    font-weight: 100;
+}
+
+.app_title{
+    font-size: 30px;
+    padding: 10px;
+}
+
+.user{
+    font-size: 17px;
+    padding-top: 10px;
+    text-align: right;
+    padding-right: 30px;
+    cursor: pointer;
+}
+.user:hover {
+    font-weight: 500;
+}
+
+.channel {
+    position: absolute;
+    font-size: 18px;
+    top: 12%;
+    left: 15px;
+}
+
+.direct {
+    position: absolute;
+    top: 53%;
+    font-size: 18px;
+    left: 15px;
+}
+
+.direct_list{
+    position: absolute;
+    font-size: 16px;
+    top: 57%;
+    width: 100%;
+    height: 42%;
+}
+
+.direct_list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.direct_list li {
+    padding: 5px 0;
+    cursor: pointer;
+    padding: 7px 18px;
+}
+
+.direct_list li:hover {
+    background-color: #5f99a7
+}

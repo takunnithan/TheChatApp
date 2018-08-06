@@ -1,0 +1,35 @@
+.top {
+    height: 70px;
+    width: 100%;
+    border-bottom: 1px solid #E5E5E5;
+}
+.channel_details{
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+}
+
+.channel_title{
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.channel_description {
+    padding: 0 10px;
+    color: #A9A9A9;
+    font-weight: 340;
+}
+
+.settings{
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+    vertical-align: top;
+}
+
+.settings_list {
+    text-align: center;
+    padding-top: 20px;
+
+}
