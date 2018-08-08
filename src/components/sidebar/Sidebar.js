@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import classes from './Sidebar.css';
-import Channel from './channel/Channel';
+import Channels from './channels/Channels';
 
 class Sidebar extends Component {
   render() {
@@ -15,7 +15,7 @@ class Sidebar extends Component {
         <div className={classes.channel}>
           Channels
         </div> 
-        <Channel />
+        <Channels />
         <div className={classes.direct}>
           Direct
         </div>
@@ -23,13 +23,6 @@ class Sidebar extends Component {
           <ul>
               <li>person-1</li>
               <li>person-2</li>
-              <li>person-3</li>
-              <li>person-1</li>
-              <li>person-2</li>
-              <li>person-3</li>
-              <li>person-1</li>
-              <li>person-2</li>
-              <li>person-3</li>
             </ul>
         </div>
       </div>

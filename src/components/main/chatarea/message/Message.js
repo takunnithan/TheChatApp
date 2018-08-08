@@ -6,7 +6,7 @@ class Message extends Component {
     return (
       <div className={classes.message_container} >
         <div className={classes.profile_pic_container}>
-        <div className={classes.profile_pic} ></div>
+        <div className={classes.profile_pic} ><img src='https://png.icons8.com/dusk/64/000000/user.png' /></div>
         </div>
         <div className={classes.message} >
           <div>
