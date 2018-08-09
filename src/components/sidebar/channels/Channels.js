@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import classes from './Channels.css';
 import axios from 'axios';
 import Channel from './channel/Channel';
+import { connect } from 'react-redux';
 
 class Channels extends Component {
 
@@ -15,15 +16,9 @@ class Channels extends Component {
         });
     }
 
-    channelClickHandler(unique_hash){
-        const chat_url = 'http://localhost:8000/chat/' + unique_hash + '/?format=json'
-        axios.get(chat_url).then(response => {
-            console.log(response);
-        });
-    }
   render() {
       const channels = this.state.channels.map(channel => {
-          return <li key={channel.id} onClick={()=>this.channelClickHandler(channel.unique_hash)}>
+          return <li key={channel.id} onClick={this.props.getGroupMessages}>
                     <Channel 
                         name={channel.group_name} 
                         unique_hash={channel.unique_hash}
@@ -42,4 +37,10 @@ class Channels extends Component {
   }
 }
 
-export default Channels;
+const mapDispatchToProps = dispatch => {
+    return {
+        getGroupMessages: () => dispatch({type: 'GROUP_MESSAGE'})
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Channels);

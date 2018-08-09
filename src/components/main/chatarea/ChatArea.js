@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import classes from './ChatArea.css';
 import Message from './message/Message';
+import { connect } from 'react-redux';
 
 class ChatArea extends Component {
 
-  state = {
-    messages: []
-  }
-
   render() {
-
-    const messages = this.state.messages.map(message => {
+    const messages = this.props.messages.map(message => {
+      console.log(message);
       return <Message 
-                id={message.uuid}
+                key={message.uuid}
+                id={message.id}
                 sender={message.sender} 
                 time={message.created_at} 
                 message={message.message} 
@@ -21,65 +19,17 @@ class ChatArea extends Component {
     return (
       <div className={classes.chat_area} >
         <div className={classes.messages} >
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
-          <Message />
+            {messages}
         </div>
       </div>
     );
   }
 }
 
-export default ChatArea;
+const mapStateToProps = state => {
+  return {
+    messages: state.messages
+  }
+}
+
+export default connect(mapStateToProps)(ChatArea);
