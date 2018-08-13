@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classes from './Sidebar.css';
 import Channels from './channels/Channels';
+import DirectChat from './direct_chat/DirectChat';
 
 class Sidebar extends Component {
   render() {
@@ -19,12 +20,7 @@ class Sidebar extends Component {
         <div className={classes.direct}>
           Direct
         </div>
-        <div className={classes.direct_list}>
-          <ul>
-              <li>person-1</li>
-              <li>person-2</li>
-            </ul>
-        </div>
+        <DirectChat />
       </div>
     );
   }

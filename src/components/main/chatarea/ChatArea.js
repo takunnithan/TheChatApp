@@ -7,9 +7,8 @@ class ChatArea extends Component {
 
   render() {
     const messages = this.props.messages.map(message => {
-      console.log(message);
       return <Message 
-                key={message.uuid}
+                key={message.id}
                 id={message.id}
                 sender={message.sender} 
                 time={message.created_at} 

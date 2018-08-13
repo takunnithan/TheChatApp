@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import classes from './Channels.css';
+import classes from './DirectChat.css';
 import axios from 'axios';
-import Channel from './channel/Channel';
+import Chat from './chat/Chat';
 import { connect } from 'react-redux';
 
-class Channels extends Component {
+class DirectChat extends Component {
 
     state = {
         channels: []
@@ -17,9 +17,9 @@ class Channels extends Component {
     }
 
   render() {
-      const channels = this.state.channels.map(channel => {
+      const direct_chats = this.state.channels.map(channel => {
           return <li key={channel.id} onClick={()=>this.props.getGroupMessages(channel.unique_hash)}>
-                    <Channel 
+                    <Chat 
                         name={channel.group_name} 
                         unique_hash={channel.unique_hash}
                         avatar={channel.avatar}
@@ -30,7 +30,7 @@ class Channels extends Component {
     return (
         <div className={classes.channel_list}>
           <ul>
-            {channels}
+            {direct_chats}
           </ul>
         </div>
     );
@@ -48,4 +48,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(Channels);
+export default connect(null, mapDispatchToProps)(DirectChat);
