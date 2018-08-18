@@ -11,7 +11,7 @@ class DirectChat extends Component {
     }
 
   componentDidMount(){
-        axios.get('http://localhost:8000/group/?user_id=111&format=json').then(response => {
+        axios.get('http://localhost:8000/direct/?user_id=111&format=json').then(response => {
             this.setState({channels: response.data})
         });
     }
@@ -20,10 +20,8 @@ class DirectChat extends Component {
       const direct_chats = this.state.channels.map(channel => {
           return <li key={channel.id} onClick={()=>this.props.getGroupMessages(channel.unique_hash)}>
                     <Chat 
-                        name={channel.group_name} 
+                        name={channel.username} 
                         unique_hash={channel.unique_hash}
-                        avatar={channel.avatar}
-                        settings={channel.settings}
                         created_at={channel.created_at}/>
                 </li>
       })
