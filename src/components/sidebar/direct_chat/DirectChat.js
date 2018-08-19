@@ -18,8 +18,9 @@ class DirectChat extends Component {
 
   render() {
       const direct_chats = this.state.channels.map(channel => {
-          return <li key={channel.id} onClick={()=>this.props.getGroupMessages(channel.unique_hash)}>
+          return <li key={channel.unique_hash} onClick={()=>this.props.getGroupMessages(channel.unique_hash)}>
                     <Chat 
+                        key={channel.unique_hash}
                         name={channel.username} 
                         unique_hash={channel.unique_hash}
                         created_at={channel.created_at}/>
@@ -37,10 +38,10 @@ class DirectChat extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getGroupMessages: (message) => {
-            const chat_url = 'http://localhost:8000/chat/' + message + '/?format=json'
+        getGroupMessages: (unique_hash) => {
+            const chat_url = 'http://localhost:8000/chat/' + unique_hash + '/?format=json'
             axios.get(chat_url).then(response => {
-            dispatch({type: 'GROUP_MESSAGE', payload: response.data})
+            dispatch({type: 'NEW_MESSAGE', payload: response.data, unique_hash: unique_hash})
             });
         }
     }

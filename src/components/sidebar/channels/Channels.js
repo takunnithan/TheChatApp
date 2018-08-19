@@ -39,10 +39,10 @@ class Channels extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getGroupMessages: (message) => {
-            const chat_url = 'http://localhost:8000/chat/' + message + '/?format=json'
+        getGroupMessages: (unique_hash) => {
+            const chat_url = 'http://localhost:8000/chat/' + unique_hash + '/?format=json'
             axios.get(chat_url).then(response => {
-            dispatch({type: 'GROUP_MESSAGE', payload: response.data})
+            dispatch({type: 'NEW_MESSAGE', payload: response.data, unique_hash: unique_hash})
             });
         }
     }
