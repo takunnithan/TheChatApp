@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classes from './ChatBox.css';
 import { connect } from 'react-redux';
+import {send_message} from '../../../store/action/action';
 
 class ChatBox extends Component {
 
@@ -20,7 +21,7 @@ const mapDispatchToProps = dispatch => {
           var message = event.target.value;
           event.target.value = '';
           if (message){
-          dispatch({type: 'SEND_MESSAGE', message: message});
+          dispatch(send_message(message));
           }
         }
       }

@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 
 class ChatArea extends Component {
 
-  componentDidUpdate(){
-    console.log('Updated!!!!');
+  componentWillUpdate(){
+    console.log('Got new messages!!!!!');
   }
 
   render() {

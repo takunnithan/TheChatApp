@@ -7,7 +7,8 @@ import { connect } from 'react-redux';
 class Channels extends Component {
 
     state = {
-        channels: []
+        channels: [],
+        li_css_class: 'channel_list_li'
     }
 
   componentDidMount(){
@@ -18,7 +19,7 @@ class Channels extends Component {
 
   render() {
       const channels = this.state.channels.map(channel => {
-          return <li key={channel.id} onClick={()=>this.props.getGroupMessages(channel.unique_hash)}>
+          return <li className={this.state.li_css_class} key={channel.id} onClick={()=>this.props.getGroupMessages(channel.unique_hash)}>
                     <Channel 
                         name={channel.group_name} 
                         unique_hash={channel.unique_hash}
