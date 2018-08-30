@@ -5,6 +5,7 @@ class Message extends Component {
   render() {
     return (
       <div className={classes.message_container} >
+        <div className={classes.edit_container} ></div>
         <div className={classes.profile_pic_container}>
         <div className={classes.profile_pic} ><img src={this.props.avatar} alt=''/></div>
         </div>

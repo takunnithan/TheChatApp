@@ -54,3 +54,18 @@ img {
     min-height: 50px;
     border-radius: 5px;
 }
+
+.edit_container {
+    display: none;
+    position: relative;
+    left: 97%;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: black;
+    box-shadow: 0px 6px 0px black, 0px 12px 0px black
+}
+
+  .message_container:hover .edit_container {
+      display: block;
+  }
