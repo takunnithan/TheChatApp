@@ -1,5 +1,6 @@
 .message_container {
     padding: 10px 0;
+    position: relative;
 }
 
 .message_container:hover {
@@ -57,7 +58,7 @@ img {
 
 .edit_container {
     display: none;
-    position: relative;
+    position: absolute;
     left: 97%;
     width: 4px;
     height: 4px;
