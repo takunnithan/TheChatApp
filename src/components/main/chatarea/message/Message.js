@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import classes from './Message.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
+import Edit from './edit_component/Edit';
 
 class Message extends Component {
+
+  editClickHandler() {
+    console.log('Edit Clicked!!!');
+  }
   render() {
     return (
       <div className={classes.message_container} >
-        <div className={classes.edit_container} ><div><FontAwesomeIcon icon={faEllipsisH} color='#989898' /></div></div>
+      <Edit />
         <div className={classes.profile_pic_container}>
         <div className={classes.profile_pic} ><img src={this.props.avatar} alt=''/></div>
         </div>

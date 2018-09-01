@@ -1,0 +1,25 @@
+.menu {
+    position: absolute;
+    left: 79%;    
+    width: 80px;
+    height: 65px;
+    top: 36px;
+    border: 1px solid #D3D3D3;
+    border-radius: 7px;
+    text-align:left;
+    padding: 15px 15px 10px 10px;
+    z-index: 1012;
+    background: white;
+}
+
+.menu div {
+    margin-bottom: 10px;
+}
+
+.options:hover {
+    background: #2d99e0;
+}
+
+.menu:active body{
+    overflow-y: hidden;
+}

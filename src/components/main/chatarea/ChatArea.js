@@ -5,10 +5,6 @@ import { connect } from 'react-redux';
 
 class ChatArea extends Component {
 
-  componentWillUpdate(){
-    console.log('Got new messages!!!!!');
-  }
-
   render() {
     const messages = this.props.messages.map(message => {
       return <Message 
