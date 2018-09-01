@@ -1,25 +1,30 @@
 .menu {
     position: absolute;
-    left: 79%;    
-    width: 80px;
-    height: 65px;
+    left: 89%;    
+    width: 85px;
+    height: 60px;
     top: 36px;
     border: 1px solid #D3D3D3;
     border-radius: 7px;
     text-align:left;
-    padding: 15px 15px 10px 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     z-index: 1012;
     background: white;
 }
 
 .menu div {
-    margin-bottom: 10px;
+    padding-bottom: 10px;
+    padding-left: 7px;
+    cursor: pointer;
+
 }
 
-.options:hover {
+.options_edit:hover {
     background: #2d99e0;
+    color: white;
 }
-
-.menu:active body{
-    overflow-y: hidden;
+.options_delete:hover {
+    background: #C63C45;
+    color: white;
 }

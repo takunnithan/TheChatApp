@@ -52,8 +52,8 @@ class Edit extends Component {
                   this.dropdownMenu = element;
                 }}
               >
-                <div className={css_classes.options}> Edit </div>
-                <div className={css_classes.options}> Delete </div>
+                <div className={css_classes.options_edit}><span> Edit </span></div>
+                <div className={css_classes.options_delete}><span> Delete </span></div>
               </div>
             )
             : (
