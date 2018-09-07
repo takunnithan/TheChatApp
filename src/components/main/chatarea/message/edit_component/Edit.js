@@ -26,12 +26,12 @@ class Edit extends Component {
   
   closeMenu(event) {
     
-    if (!this.dropdownMenu.contains(event.target)) {
-      
-      this.setState({ showMenu: false }, () => {
-        document.removeEventListener('click', this.closeMenu);
-      });  
-      
+    if (this.dropdownMenu != null) {
+      if (!this.dropdownMenu.contains(event.target)){
+        this.setState({ showMenu: false }, () => {
+          document.removeEventListener('click', this.closeMenu);
+        });  
+      }      
     }
   }
 
@@ -52,7 +52,7 @@ class Edit extends Component {
                   this.dropdownMenu = element;
                 }}
               >
-                <div className={css_classes.options_edit}><span> Edit </span></div>
+                <div className={css_classes.options_edit} onClick={this.props.editClickHandler}><span> Edit </span></div>
                 <div className={css_classes.options_delete}><span> Delete </span></div>
               </div>
             )
