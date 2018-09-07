@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import classes from './Message.css';
 import Edit from './edit_component/Edit';
-import chat_box_classes from '../../chatbox/ChatBox.css';
 
 class Message extends Component {
 
@@ -14,11 +13,16 @@ class Message extends Component {
     };
     
     this.editClickHandler = this.editClickHandler.bind(this);
+    this.cancelHandler = this.cancelHandler.bind(this);
     // this.closeMenu = this.closeMenu.bind(this);
   }
 
   editClickHandler() {
     this.setState({ showEdit: true });
+  }
+
+  cancelHandler() {
+    this.setState({ showEdit: false });
   }
 
 
@@ -28,7 +32,10 @@ class Message extends Component {
       {
         this.state.showEdit
         ? (
-          <EditDialogBox avatar={this.props.avatar} message={this.props.message} />
+          <EditDialogBox 
+            avatar={this.props.avatar} 
+            message={this.props.message}
+            cancelHandler={this.cancelHandler} />
         )
         :(
           <div className={classes.message_container} >
@@ -57,6 +64,8 @@ export default Message;
 
 
 class EditDialogBox extends Component {
+
+
   render() {
     return (
     <div className={classes.message_container}>
@@ -72,7 +81,7 @@ class EditDialogBox extends Component {
       </div>
     </div>
       <div className={classes.edit_button_container}>
-        <button className={classes.cancel_button} >Cancel</button>
+        <button className={classes.cancel_button} onClick={this.props.cancelHandler}>Cancel</button>
         <button className={classes.save_button} >Save</button>
       </div>
 
