@@ -9,6 +9,7 @@ class Message extends Component {
     super(props);
     
     this.state = {
+      deleted: false,
       showEdit: false,
       showDelete: false,
       message: props.message,
@@ -20,6 +21,17 @@ class Message extends Component {
     this.cancelHandler = this.cancelHandler.bind(this);
     this.saveHandler = this.saveHandler.bind(this);
     this.onChangeHandler = this.onChangeHandler.bind(this);
+    this.onDeleteHandler = this.onDeleteHandler.bind(this);
+  }
+
+
+  onDeleteHandler() {
+    // TODO: Need a Modal with opaque background 
+    // A dialog box with delete prompt
+    window.alert('Do you want to delete this message?');
+    var patch_url = 'http://localhost:8000/messages/' + this.state.message_id +'/';
+    axios.delete(patch_url);
+    this.setState({ deleted: true });
   }
 
   editClickHandler() {
@@ -50,6 +62,9 @@ class Message extends Component {
 
   render() {
     return (
+      this.state.deleted
+      ? (null)
+      :(
       <div>
       {
         this.state.showEdit
@@ -63,7 +78,9 @@ class Message extends Component {
         )
         :(
           <div className={classes.message_container} >
-          <Edit editClickHandler={this.editClickHandler}/>
+          <Edit 
+              editClickHandler={this.editClickHandler}
+              onDeleteHandler={this.onDeleteHandler}/>
             <div className={classes.profile_pic_container}>
             <div className={classes.profile_pic} ><img src={this.props.avatar} alt=''/></div>
             </div>
@@ -80,6 +97,7 @@ class Message extends Component {
         )
       }
       </div>
+      )
     );
   }
 }

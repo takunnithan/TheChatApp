@@ -53,7 +53,7 @@ class Edit extends Component {
                 }}
               >
                 <div className={css_classes.options_edit} onClick={this.props.editClickHandler}><span> Edit </span></div>
-                <div className={css_classes.options_delete}><span> Delete </span></div>
+                <div className={css_classes.options_delete} onClick={this.props.onDeleteHandler}><span> Delete </span></div>
               </div>
             )
             : (
