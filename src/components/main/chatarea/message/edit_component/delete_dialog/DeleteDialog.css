@@ -41,5 +41,7 @@
       font-size: 13px;
   
   }
-  
-  button:focus {outline:none !important}
+
+  button:hover {
+    cursor: pointer;
+  }

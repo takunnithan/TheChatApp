@@ -99,8 +99,23 @@ class Message extends Component {
                   <Modal>
                     <DeleteDialog 
                           onDeleteHandler={this.onDeleteButtonHandler}
-                          onCancelHandler={this.onCancelButtonHandler} />
-                  </Modal> 
+                          onCancelHandler={this.onCancelButtonHandler}
+                          message={                                            <div className={classes.message_container} >  
+                          <div className={classes.profile_pic_container}>
+                          <div className={classes.profile_pic} ><img src={this.props.avatar} alt=''/></div>
+                          </div>
+                          <div className={classes.message} >
+                            <div>
+                              <div className={classes.message_details}>{this.props.sender}</div>
+                              <div className={classes.message_time}>{this.props.time}</div>
+                            </div>
+                            <div className={classes.message_body}>
+                              {this.state.message}
+                            </div>
+                          </div>
+                        </div> } />
+
+                  </Modal>
               </div>
               )
           :(null)
