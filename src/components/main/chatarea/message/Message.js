@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import classes from './Message.css';
 import Edit from './edit_component/Edit';
 import axios from 'axios';
+import Modal from '../../modal/Modal';
+import DeleteDialog from './edit_component/delete_dialog/DeleteDialog';
 
 class Message extends Component {
 
@@ -22,16 +24,37 @@ class Message extends Component {
     this.saveHandler = this.saveHandler.bind(this);
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onDeleteHandler = this.onDeleteHandler.bind(this);
+    this.closeDeleteDialog = this.closeDeleteDialog.bind(this);
+    this.onDeleteButtonHandler = this.onDeleteButtonHandler.bind(this);
+    this.onCancelButtonHandler = this.onCancelButtonHandler.bind(this);
   }
 
 
-  onDeleteHandler() {
-    // TODO: Need a Modal with opaque background 
-    // A dialog box with delete prompt
-    window.alert('Do you want to delete this message?');
-    var patch_url = 'http://localhost:8000/messages/' + this.state.message_id +'/';
-    axios.delete(patch_url);
+  onDeleteHandler(event) {
+    event.preventDefault();
+    this.setState({ showDelete: true }, () => {
+      document.addEventListener('click', this.closeDeleteDialog);
+    });
+  }
+
+  onDeleteButtonHandler() {
+    var delete_url = 'http://localhost:8000/messages/' + this.state.message_id +'/';
+    axios.delete(delete_url);
     this.setState({ deleted: true });
+  }
+
+  onCancelButtonHandler() {
+    this.setState({ showDelete: false });
+  }
+  
+  closeDeleteDialog(event) {
+    if (this.dropdownMenu != null) {
+      if (!this.dropdownMenu.contains(event.target)){
+        this.setState({ showDelete: false }, () => {
+          document.removeEventListener('click', this.closeDeleteDialog);
+        });  
+      }      
+    }
   }
 
   editClickHandler() {
@@ -66,6 +89,19 @@ class Message extends Component {
       ? (null)
       :(
       <div>
+        {
+          this.state.showDelete
+          ? ( <div ref={(element) => {
+                  this.dropdownMenu = element;
+                  }}>
+                  <Modal>
+                    <DeleteDialog 
+                          onDeleteHandler={this.onDeleteButtonHandler}
+                          onCancelHandler={this.onCancelButtonHandler} />
+                  </Modal> 
+              </div>)
+          :(null)
+        }
       {
         this.state.showEdit
         ? (

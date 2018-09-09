@@ -1,0 +1,45 @@
+.delete_container {
+    height: 100px;
+    width: 100px;
+    padding: 30px;
+}
+
+.message {
+    margin-top: 20px;
+    height: 100%;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.button_container {
+    overflow: hidden;
+    width: 100%;
+    min-height: 40px; 
+    position: relative;
+    left: 300px;
+  }
+  
+  .cancel_button {
+      margin-right: 5px;
+      border-radius: 5px;
+      height:37px;
+      width: 75px;
+      font-weight: 500;
+      font-size: 13px;
+  }
+  
+  .delete_button {
+      margin-left: 10px;
+      background-color: red;
+      color: white;
+      border-radius: 5px;
+      height: 37px;
+      width: 75px;
+      font-weight: 500;
+      font-size: 13px;
+  
+  }
+  
+  button:focus {outline:none !important}
