@@ -12,11 +12,12 @@ class Edit extends Component {
       showMenu: false,
     };
     
-    this.showMenu = this.showMenu.bind(this);
+    this.showMenuHander = this.showMenuHander.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
+    this.onDeleteClickHandler = this.onDeleteClickHandler.bind(this);
   }
   
-  showMenu(event) {
+  showMenuHander(event) {
     event.preventDefault();
     
     this.setState({ showMenu: true }, () => {
@@ -35,10 +36,15 @@ class Edit extends Component {
     }
   }
 
+  onDeleteClickHandler(event){
+    this.setState({ showMenu: false });
+    this.props.onDeleteHandler(event);
+  }
+
   render() {
     return (
       <div>
-        <div className={classes.edit_container} onClick={this.showMenu} >
+        <div className={classes.edit_container} onClick={this.showMenuHander} >
             <div>
                 <FontAwesomeIcon icon={faEllipsisH} color='#989898' />
             </div>
@@ -53,7 +59,7 @@ class Edit extends Component {
                 }}
               >
                 <div className={css_classes.options_edit} onClick={this.props.editClickHandler}><span> Edit </span></div>
-                <div className={css_classes.options_delete} onClick={this.props.onDeleteHandler}><span> Delete </span></div>
+                <div className={css_classes.options_delete} onClick={this.onDeleteClickHandler}><span> Delete </span></div>
               </div>
             )
             : (

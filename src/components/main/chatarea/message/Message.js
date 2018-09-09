@@ -4,6 +4,7 @@ import Edit from './edit_component/Edit';
 import axios from 'axios';
 import Modal from '../../modal/Modal';
 import DeleteDialog from './edit_component/delete_dialog/DeleteDialog';
+import Backdrop from '../../backdrop/Backdrop';
 
 class Message extends Component {
 
@@ -48,8 +49,8 @@ class Message extends Component {
   }
   
   closeDeleteDialog(event) {
-    if (this.dropdownMenu != null) {
-      if (!this.dropdownMenu.contains(event.target)){
+    if (this.delete_dialog != null) {
+      if (!this.delete_dialog.contains(event.target)){
         this.setState({ showDelete: false }, () => {
           document.removeEventListener('click', this.closeDeleteDialog);
         });  
@@ -89,17 +90,19 @@ class Message extends Component {
       ? (null)
       :(
       <div>
+        <Backdrop show={this.state.showDelete} click={this.closeDeleteDialog}/>
         {
           this.state.showDelete
           ? ( <div ref={(element) => {
-                  this.dropdownMenu = element;
+                  this.delete_dialog = element;
                   }}>
                   <Modal>
                     <DeleteDialog 
                           onDeleteHandler={this.onDeleteButtonHandler}
                           onCancelHandler={this.onCancelButtonHandler} />
                   </Modal> 
-              </div>)
+              </div>
+              )
           :(null)
         }
       {
@@ -116,7 +119,7 @@ class Message extends Component {
           <div className={classes.message_container} >
           <Edit 
               editClickHandler={this.editClickHandler}
-              onDeleteHandler={this.onDeleteHandler}/>
+              onDeleteHandler={this.onDeleteHandler} />
             <div className={classes.profile_pic_container}>
             <div className={classes.profile_pic} ><img src={this.props.avatar} alt=''/></div>
             </div>
