@@ -24,7 +24,7 @@
 .message_details {
     display: inline-block;
     font-weight: bold;
-    font-size: 17px;
+    font-size: 16px;
 }
 
 .message_time {
@@ -37,7 +37,6 @@
 
 .message_body {
     padding-top: 7px;
-    font-weight: 600;
 }
 
 img {
@@ -80,8 +79,6 @@ img {
     height: 100%;
     border-radius: 5px;
     border: 2px solid #BCBCBD;
-    font-size: 17px;
-    font-weight: 200;
     max-height: 300px;
     overflow-y: scroll;
 }
