@@ -10,7 +10,7 @@ class Login extends Component {
         <div className={classes.thechatapp_logo}>TheChatApp</div>
         <div className={classes.inputs}>
           <input className={classes.input} defaultValue='username' />
-          <input className={classes.input} defaultValue='password' />
+          <input className={classes.input} type="password" defaultValue='password' />
           </div>
         <div className={classes.login_button_container}>
           <button className={classes.login_button}>Login</button>

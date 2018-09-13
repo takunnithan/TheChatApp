@@ -11,7 +11,7 @@
     left: 0;
     right: 0;
     margin: auto;
-    width: 600px;
+    width: 550px;
     height: 500px;
     border: 1px solid #ffffff;
     border-radius: 7px;
@@ -23,7 +23,7 @@
 .thechatapp_logo {
     font-size: 40px;
     color: black;
-    padding-top: 50px;
+    padding-top: 65px;
     text-align: center;
 }
 
