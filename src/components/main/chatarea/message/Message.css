@@ -74,8 +74,6 @@ img {
 .chatbox {
     height: 45px;
     width: 90%;
-    margin: auto;
-    display: inline-block;
 }
 .text_area{
     width: 100%;
@@ -84,11 +82,17 @@ img {
     border: 2px solid #BCBCBD;
     font-size: 17px;
     font-weight: 200;
+    max-height: 300px;
+    overflow-y: scroll;
 }
 
 .text_area:focus {
     border-color: #696969;
     outline: none;
+}
+
+.text_area:focus{
+    background-color: white;
 }
 
 .edit_button_container {
@@ -120,3 +124,12 @@ img {
 }
 
 button:focus {outline:none !important}
+
+
+.this_is_bad {
+    display: flex;
+}
+
+.not_proud_of_it {
+    width: 100%;
+}

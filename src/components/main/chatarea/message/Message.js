@@ -80,7 +80,7 @@ class Message extends Component {
   }
 
   onChangeHandler(e) {
-    this.setState({ update_message : e.target.value });
+    this.setState({ update_message : e.target.children[0].innerText });
   }
 
 
@@ -163,25 +163,29 @@ export default Message;
 class EditDialogBox extends Component {
 
   render() {
+    const css_classes = classes.chatbox + ' ' + classes.text_area
     return (
     <div className={classes.message_container}>
-    <div>
+    <div className={classes.not_proud_of_it}>
+      <div className={classes.this_is_bad}>
       <div className={classes.profile_pic_container}>
         <div className={classes.profile_pic} ><img src={this.props.avatar} alt=''/></div>
       </div>
-      <div className={classes.chatbox} >
-        <input className={classes.text_area}
-               defaultValue={this.props.message} 
-               type="text"
-               onChange={this.props.onChangeHandler}
-               />
+      <div 
+          className={ css_classes } 
+          contentEditable="true" 
+          onInput={this.props.onChangeHandler} 
+          suppressContentEditableWarning="true">
+        <p>
+          {this.props.message}
+        </p>
       </div>
     </div>
-      <div className={classes.edit_button_container}>
+    <div className={classes.edit_button_container}>
         <button className={classes.cancel_button} onClick={this.props.cancelHandler}>Cancel</button>
         <button className={classes.save_button} onClick={this.props.saveHandler}>Save</button>
       </div>
-
+    </div>
     </div>
     );
   }
