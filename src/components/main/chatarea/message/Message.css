@@ -1,16 +1,10 @@
 .message_container {
     padding: 10px 0;
     position: relative;
-}
-
-.message_container:hover {
-    background-color: #F8F8F8
+    display: flex;
 }
 
 .profile_pic_container {
-    display: inline-block;
-    height: inherit;
-    vertical-align: top;
     padding-right: 10px;
 }
 
@@ -23,9 +17,8 @@
     vertical-align: top;
 }
 
-.message {
-    display: inline-block;
-    width: 90%;
+.container:hover {
+    background-color: #F8F8F8;
 }
 
 .message_details {
