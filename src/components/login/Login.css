@@ -1,0 +1,68 @@
+.login_main {
+    background-color: #e6e6e6;
+    width: 100%;
+    height: 100%;
+}
+
+.login_box {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 600px;
+    height: 500px;
+    border: 1px solid #ffffff;
+    border-radius: 7px;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 100px 0px #cccccc;
+}
+
+.thechatapp_logo {
+    font-size: 40px;
+    color: black;
+    padding-top: 50px;
+    text-align: center;
+}
+
+.inputs {
+    text-align: center;
+    padding: 40px;
+    padding-bottom: 30px;
+}
+
+.input {
+    margin: 10px;
+    width: 55%;
+    padding: 10px;
+    border: 1px solid #919193;
+    border-radius: 4px;
+    font-size: 20px;
+    color: #919193;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+.login_button_container {
+    text-align: center;
+}
+
+.login_button {
+    text-align: center;
+    width: 50%;
+    background-color: #008952;
+    height: 47px;
+    border: 1px solid #008952;
+    border-radius: 4px;
+    font-size: 20px;
+    color: #ffffff;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.remember_me {
+    margin-top: 30px;
+    text-align: center;
+}
