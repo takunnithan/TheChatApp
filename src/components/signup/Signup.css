@@ -47,7 +47,7 @@
 }
 
 .labels {
-    font-size: 25px;
+    font-size: 23px;
     color: #2C2D30;
     font-weight: 200;
     text-align: left;
@@ -67,9 +67,9 @@
 .signup_button {
     text-align: center;
     width: 91%;
-    background-color: #0099FF;
+    background-color: #20B2FE;
     height: 47px;
-    border: 1px solid #0099FF;
+    border: 1px solid#20B2FE;
     border-radius: 4px;
     font-size: 20px;
     color: #ffffff;

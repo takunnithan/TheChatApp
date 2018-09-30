@@ -2,6 +2,7 @@
     padding: 10px 0;
     position: relative;
     display: flex;
+    font-weight: 300;
 }
 
 .profile_pic_container {
@@ -130,3 +131,5 @@ button:focus {outline:none !important}
 .not_proud_of_it {
     width: 100%;
 }
+
+
