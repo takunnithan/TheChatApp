@@ -11,9 +11,18 @@ class DirectChat extends Component {
     }
 
   componentDidMount(){
-        axios.get('http://localhost:8000/direct/?user_id=111&format=json').then(response => {
-            this.setState({channels: response.data})
-        });
+    axios(
+        {
+            method: 'get',
+            url: 'http://localhost:8000/direct/?user_id='+localStorage.getItem('user_id')+'&format=json',
+            headers: {
+                'auth-token':localStorage.getItem('auth_token'),
+                'user-id': localStorage.getItem('user_id')
+            }
+        }
+    ).then(response => {
+        this.setState({channels: response.data})
+    });
     }
 
   render() {
@@ -39,8 +48,15 @@ class DirectChat extends Component {
 const mapDispatchToProps = dispatch => {
     return {
         getGroupMessages: (unique_hash) => {
-            const chat_url = 'http://localhost:8000/chat/' + unique_hash + '/?format=json'
-            axios.get(chat_url).then(response => {
+            axios(
+                {
+                    method: 'get',
+                    url: 'http://localhost:8000/chat/' + unique_hash + '/?format=json',
+                    headers: {
+                        'auth-token':localStorage.getItem('auth_token'),
+                        'user-id': localStorage.getItem('user_id')
+                    }
+                }).then(response => {
             dispatch({type: 'NEW_MESSAGE', payload: response.data, unique_hash: unique_hash})
             });
         }
