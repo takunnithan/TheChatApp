@@ -45,16 +45,16 @@ class App extends Component {
 
   render() {
     return (
-      localStorage.getItem('is_logged_in')
-      ? (       
-          <div className={classes.app} >
-              <div className={classes.sidebar} ><Sidebar/></div>
-              <div className={classes.main} ><Main /></div>
-          </div>
-        )
-      :(<Login loginHandler={this.loginHandler} inputHandler={this.inputHandler} message={this.state.login_error_message} />)
+      // localStorage.getItem('is_logged_in')
+      // ? (       
+      //     <div className={classes.app} >
+      //         <div className={classes.sidebar} ><Sidebar/></div>
+      //         <div className={classes.main} ><Main /></div>
+      //     </div>
+      //   )
+      // :(<Login loginHandler={this.loginHandler} inputHandler={this.inputHandler} message={this.state.login_error_message} />)
 
-      // <Signup />
+      <Signup />
     );  
   }
 }
