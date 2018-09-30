@@ -6,12 +6,12 @@ class Login extends Component {
   render() {
     return (
       <div className={classes.login_main} >
-      <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"></link>
+      <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"></link>
         <div className={classes.login_box}>
         <div className={classes.thechatapp_logo}>TheChatApp</div>
         <div className={classes.inputs}>
-          <input className={classes.input} name= 'username' defaultValue='username' onChange={this.props.inputHandler} />
-          <input className={classes.input} name= 'password' type="password" defaultValue='password' onChange={this.props.inputHandler} />
+          <input className={classes.input} id= 'username' placeholder='username' onChange={this.props.inputHandler} />
+          <input className={classes.input} id= 'password' type="password" placeholder='password' onChange={this.props.inputHandler} />
           </div>
         <div className={classes.login_button_container}>
           <button className={classes.login_button} onClick={this.props.loginHandler}>Login</button>

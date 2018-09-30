@@ -5,6 +5,7 @@ import axios from 'axios';
 import Sidebar from './components/sidebar/Sidebar';
 import Main from './components/main/Main';
 import Login from './components/login/Login';
+import Signup from './components/signup/Signup';
 
 
 class App extends Component {
@@ -39,7 +40,7 @@ class App extends Component {
   }
 
   inputHandler = (e) => {
-    e.target.name === 'username' ? (this.setState({username:e.target.value})) : (this.setState({password:e.target.value}));
+    e.target.id === 'username' ? (this.setState({username:e.target.value})) : (this.setState({password:e.target.value}));
   }
 
   render() {
@@ -52,6 +53,8 @@ class App extends Component {
           </div>
         )
       :(<Login loginHandler={this.loginHandler} inputHandler={this.inputHandler} message={this.state.login_error_message} />)
+
+      // <Signup />
     );  
   }
 }
