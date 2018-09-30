@@ -9,13 +9,23 @@ export const return_message = (response) => {
 
 export const send_message = (message) => {
     return (dispatch, getState) => {
+        var user_id = localStorage.getItem('user_id')
         var state = getState();
         var payload = {
-            sender: 111,
+            sender: user_id,
             message: message,
             unique_hash: state.selected_unique_hash
         }
-        axios.post('http://localhost:8000/messages/', payload).then(response => {
+        axios(
+            {
+                method: 'post',
+                url: 'http://localhost:8000/messages/',
+                headers: {
+                    'auth-token':localStorage.getItem('auth_token'),
+                    'user-id': user_id
+                },
+                data: payload
+            }).then(response => {
             dispatch(return_message(response.data));
         });
     }

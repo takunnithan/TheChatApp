@@ -40,7 +40,15 @@ class Message extends Component {
 
   onDeleteButtonHandler() {
     var delete_url = 'http://localhost:8000/messages/' + this.state.message_id +'/';
-    axios.delete(delete_url);
+    axios({
+      method: 'delete',
+      url: delete_url,
+      headers: {
+        'auth-token':localStorage.getItem('auth_token'),
+        'user-id': localStorage.getItem('user_id')
+    },
+    }
+      );
     this.setState({ deleted: true });
   }
 
@@ -74,7 +82,15 @@ class Message extends Component {
     var patch_url = 'http://localhost:8000/messages/' + this.state.message_id +'/';
 
     // TODO: Get the response and if status is not 200 then - Failure message / Retry option
-    axios.patch(patch_url, payload);
+    axios({
+      method: 'patch',
+      url: patch_url,
+      headers: {
+        'auth-token':localStorage.getItem('auth_token'),
+        'user-id': localStorage.getItem('user_id')
+    },
+    data: payload
+    });
     this.setState({ message : this.state.update_message });
     this.setState({ showEdit: false });
   }
