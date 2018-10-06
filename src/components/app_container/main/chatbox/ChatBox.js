@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classes from './ChatBox.css';
 import { connect } from 'react-redux';
-import {send_message} from '../../../store/action/action';
+import {send_message} from '../../../../store/action/action';
 
 class ChatBox extends Component {
 

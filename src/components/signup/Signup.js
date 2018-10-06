@@ -15,7 +15,7 @@ class Signup extends Component {
               <input className={classes.input} id= 'username' placeholder='username' onChange={this.props.inputHandler} />
       
               <div className={classes.labels}>full name</div>
-              <input className={classes.input} id= 'fullname ' placeholder='fullname' onChange={this.props.inputHandler} />
+              <input className={classes.input} id= 'fullname' placeholder='fullname' onChange={this.props.inputHandler} />
       
       
               <div className={classes.labels}>password</div>
@@ -23,12 +23,15 @@ class Signup extends Component {
       
       
               <div className={classes.labels}>re-password</div>
-              <input className={classes.input} id= 'confirm' type="password" placeholder='re-password' onChange={this.props.inputHandler} />
+              <input className={classes.input} id= 're-password' type="password" placeholder='re-password' onChange={this.props.inputHandler} />
          </div>
 
           <div className={classes.signup_button_container}>
-            <button className={classes.signup_button} onClick={this.props.loginHandler}>Sign up</button>
+            <button className={classes.signup_button} onClick={this.props.signupHandler}>Sign up</button>
         </div>
+        <div className={classes.signup_error}>
+          {this.props.error_message}
+      </div>
       </div>
       </div>
     );  

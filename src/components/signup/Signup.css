@@ -76,3 +76,10 @@
     font-weight: 500;
     letter-spacing: 1px;
 }
+
+.signup_error {
+    margin-top: 20px;
+    text-align: center;
+    color: red;
+    font-weight: 700;
+}
