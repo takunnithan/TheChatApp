@@ -1,7 +1,45 @@
 import React, { Component } from 'react';
 import classes from './Login.css';
+import axios from 'axios';
 
 class Login extends Component {
+
+  state = {
+    username : null,
+    password : null,
+    error_message: null,
+  }
+
+  handleResponse = (response) => {
+    var res_data = response.data;
+      if (res_data.login_success === true) {
+        localStorage.setItem('is_logged_in', true);
+        localStorage.setItem('auth_token', res_data.token);
+        localStorage.setItem('user_id', res_data.user_id);
+        this.setState({error_message:null, username: null, password: null});
+      } else {
+        this.setState({error_message: res_data.reason, password: null});
+      }
+  }
+
+  loginHandler = () =>{
+    var login_url = 'http://localhost:8000/login/';
+    var payload = {
+        username: this.state.username,
+        password: this.state.password,
+    }
+    axios({
+      method: 'post',
+      url:login_url,
+      data:payload
+    }).then(response => {
+      this.handleResponse(response);
+  });
+  }
+
+  inputHandler = (e) => {
+    e.target.id === 'username' ? (this.setState({username:e.target.value})) : (this.setState({password:e.target.value}));
+  }
 
   render() {
     return (
@@ -10,17 +48,17 @@ class Login extends Component {
         <div className={classes.login_box}>
         <div className={classes.thechatapp_logo}>TheChatApp</div>
         <div className={classes.inputs}>
-          <input className={classes.input} id= 'username' placeholder='username' onChange={this.props.inputHandler} />
-          <input className={classes.input} id= 'password' type="password" placeholder='password' onChange={this.props.inputHandler} />
+          <input className={classes.input} id= 'username' placeholder='username' onChange={this.inputHandler} />
+          <input className={classes.input} id= 'password' type="password" placeholder='password' onChange={this.inputHandler} />
           </div>
         <div className={classes.login_button_container}>
-          <button className={classes.login_button} onClick={this.props.loginHandler}>Login</button>
+          <button className={classes.login_button} onClick={this.loginHandler}>Login</button>
         </div>
         <div className={classes.remember_me}>
           <input type="checkbox" name="remember"/> Remember me
         </div>
         <div className={classes.error}>
-          {this.props.message}
+          {this.state.error_message}
         </div>
       </div>
       </div>
