@@ -21,9 +21,3 @@ class App extends Component {
 }
 
 export default App;
-
-// localStorage.getItem('is_logged_in')
-// ? (
-//       <AppContainer />
-//   )
-// :(<Login loginHandler={this.loginHandler} inputHandler={this.inputHandler} message={this.state.login_error_message} />)

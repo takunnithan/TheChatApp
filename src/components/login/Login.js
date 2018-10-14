@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classes from './Login.css';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 class Login extends Component {
 
@@ -10,6 +11,14 @@ class Login extends Component {
     error_message: null,
   }
 
+  
+  componentWillMount() {
+    if (localStorage.getItem('is_logged_in')){
+        this.props.history.push({pathname: '/chat'});
+    }
+  }
+  
+
   handleResponse = (response) => {
     var res_data = response.data;
       if (res_data.login_success === true) {
@@ -17,6 +26,10 @@ class Login extends Component {
         localStorage.setItem('auth_token', res_data.token);
         localStorage.setItem('user_id', res_data.user_id);
         this.setState({error_message:null, username: null, password: null});
+
+        // Redirect to chat
+        // Add the personal space UUID in the API response and redirect to that here!!!
+        this.props.history.push({pathname: '/chat'});
       } else {
         this.setState({error_message: res_data.reason, password: null});
       }
@@ -59,6 +72,9 @@ class Login extends Component {
         </div>
         <div className={classes.error}>
           {this.state.error_message}
+        </div>
+        <div className={classes.error}>
+          <Link to='/signup'>SignUp</Link>
         </div>
       </div>
       </div>

@@ -64,6 +64,9 @@ class Signup extends Component {
         localStorage.setItem('auth_token', res_data.token);
         localStorage.setItem('user_id', res_data.user_id);
         this.setState({error_message:null, username: null, password: null});
+        // Redirect to chat
+        // Add the personal space UUID in the API response and redirect to that here!!!
+        this.props.history.push({pathname: '/chat'});
       } else {
         this.setState({error_message: res_data.reason, password: null});
       }
