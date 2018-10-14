@@ -5,6 +5,12 @@ import Main from './main/Main';
 import classes from './AppContainer.css';
 
 class AppContainer extends Component {
+
+    componentWillMount() {
+        if (!localStorage.getItem('is_logged_in')){
+            this.props.history.push({pathname: '/'});
+        }
+      }
     render() {
         return (
             <div className={classes.app} >
