@@ -14,10 +14,21 @@ class ChatArea extends Component {
     ReactDOM.findDOMNode(messageList).scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
     }
 
+    // WebSocket 
+
+  //  var chatSocket = new WebSocket(
+  //     'ws://' + 'localhost:8000/ws/chat/HGJ87L/');
+
+  // chatSocket.onmessage() {
+  //   var data = JSON.parse(e.data);
+  //   var message = data['message'];
+  //   document.querySelector('#chat-log').value += (message + '\n');
+  // };
+
   componentDidUpdate() {
       this.scrollToBottom();
   }
-
+  
   render() {
     const messages = this.props.messages.map(message => {
       return <Message 
