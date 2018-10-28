@@ -1,0 +1,35 @@
+ {
+    logged_in_user: 'john',
+    avatar: 'http://www.gstatic.com/webp/gallery/1.webp',
+    messages : {
+        JKJLJJKL: [
+            {
+                uuid: '1',
+                sender: 'john',
+                created_at: '10.30 AM',
+                message: 'This is a message from the REDUCER',
+                avatar: 'http://www.gstatic.com/webp/gallery/1.webp',
+                id:0
+            }, ...
+        ],
+        HUDJDHD: [......]
+    },
+    selected_unique_hash: 'JKJLJJKL',
+    user_unique_hash: 'HDHDHDJKD',
+    direct_chat_list: [{name: 'john', unique_hash: 'JKDJK'}, ...],
+    channel_list: [{name: 'general', unique_hash: 'JKDJK'}, ...]
+    new_messages: [ list of Channels , direct which has new messages]
+}
+
+
+login response = {
+    'username': 'john',
+    'avatar': 'http://dsjkfljdsalj',
+    'user_id': user.uuid,
+    'login_success': True,
+    'token': session_token,
+    'unique_hash': CNMCKNCNK,
+    'messages': [{}...]   
+}
+
+

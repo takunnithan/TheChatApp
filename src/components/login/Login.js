@@ -65,7 +65,7 @@ class Login extends Component {
           <input className={classes.input} id= 'password' type="password" placeholder='password' onChange={this.inputHandler} />
           </div>
         <div className={classes.login_button_container}>
-          <button className={classes.login_button} onClick={this.loginHandler}>Login</button>
+          <button className={classes.login_button} onClick={this.props.loginHandler}>Login</button>
         </div>
         <div className={classes.remember_me}>
           <input type="checkbox" name="remember"/> Remember me
@@ -82,4 +82,22 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapDispatchToProps = dispatch => {
+  return {
+      loginHandler: (username, password) => {
+          axios(
+              {
+                  method: 'get',
+                  url: 'http://localhost:8000/chat/' + unique_hash + '/?format=json',
+                  headers: {
+                      'auth-token':localStorage.getItem('auth_token'),
+                      'user-id': localStorage.getItem('user_id')
+                  }
+              }).then(response => {
+          dispatch({type: 'NEW_MESSAGE', payload: response.data, unique_hash: unique_hash})
+          });
+      }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Login);
