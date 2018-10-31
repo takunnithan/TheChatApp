@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import classes from './Login.css';
-import axios from 'axios';
 import {Link} from 'react-router-dom';
+import { connect } from 'react-redux';
+import {loginAction} from '../../store/action/action';
 
 class Login extends Component {
 
@@ -10,44 +11,11 @@ class Login extends Component {
     password : null,
     error_message: null,
   }
-
   
   componentWillMount() {
     if (localStorage.getItem('is_logged_in')){
         this.props.history.push({pathname: '/chat'});
     }
-  }
-  
-
-  handleResponse = (response) => {
-    var res_data = response.data;
-      if (res_data.login_success === true) {
-        localStorage.setItem('is_logged_in', true);
-        localStorage.setItem('auth_token', res_data.token);
-        localStorage.setItem('user_id', res_data.user_id);
-        this.setState({error_message:null, username: null, password: null});
-
-        // Redirect to chat
-        // Add the personal space UUID in the API response and redirect to that here!!!
-        this.props.history.push({pathname: '/chat'});
-      } else {
-        this.setState({error_message: res_data.reason, password: null});
-      }
-  }
-
-  loginHandler = () =>{
-    var login_url = 'http://localhost:8000/login/';
-    var payload = {
-        username: this.state.username,
-        password: this.state.password,
-    }
-    axios({
-      method: 'post',
-      url:login_url,
-      data:payload
-    }).then(response => {
-      this.handleResponse(response);
-  });
   }
 
   inputHandler = (e) => {
@@ -65,7 +33,7 @@ class Login extends Component {
           <input className={classes.input} id= 'password' type="password" placeholder='password' onChange={this.inputHandler} />
           </div>
         <div className={classes.login_button_container}>
-          <button className={classes.login_button} onClick={this.props.loginHandler}>Login</button>
+          <button className={classes.login_button} onClick={() => this.props.loginHandler(this)}>Login</button>
         </div>
         <div className={classes.remember_me}>
           <input type="checkbox" name="remember"/> Remember me
@@ -84,20 +52,11 @@ class Login extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-      loginHandler: (username, password) => {
-          axios(
-              {
-                  method: 'get',
-                  url: 'http://localhost:8000/chat/' + unique_hash + '/?format=json',
-                  headers: {
-                      'auth-token':localStorage.getItem('auth_token'),
-                      'user-id': localStorage.getItem('user_id')
-                  }
-              }).then(response => {
-          dispatch({type: 'NEW_MESSAGE', payload: response.data, unique_hash: unique_hash})
-          });
+      loginHandler: (self) => {
+          dispatch(loginAction(self));
+          }
       }
   }
-}
+  // self.state.username, self.state.password, self.props.history
 
 export default connect(null, mapDispatchToProps)(Login);

@@ -35,6 +35,26 @@ const reducer = (state=intialState, action) => {
             messages: newMessages
         };
     }
+    else if (action.type === 'LOGIN') {
+        
+        return {
+            ...state,
+            logged_in_user: action.res_data.username,
+            avatar: action.res_data.avatar,
+            user_unique_hash: action.res_data.unique_hash,
+        };
+    }
     return state;
 };
 export default reducer;
+
+
+// Use a switch here instead of if - else
+
+// Create a helper function for redux store update
+
+
+// Need the following helper function
+//  1. Deep copying redux store
+//  2. Updating messages for individual channel
+//  3. Updating/Adding whole message for a channel
