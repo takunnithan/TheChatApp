@@ -5,6 +5,20 @@
 // Create a separate file
 // ===================================================================
 
+
+// TODOs:
+
+// Message Edit doesn't show up right away 
+//     - Because store doesn't get updated.
+
+// Fix - make the messages a list of dicts
+
+// Checkout Redux-store-structure file
+// This will work for `delete` too
+// Eventually `edit`, `delete` will be moved from REST to WS.
+
+
+
 const initialState = {messages:{}}
 
 const reducer = (state=initialState, action) => {

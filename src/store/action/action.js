@@ -87,7 +87,7 @@ export const getMessages = (unique_hash) => {
     return (dispatch, getState) => {
         var data = {}
         var res_obj = JSON.parse(JSON.stringify(getState().messages));
-        if (res_obj[unique_hash]){
+        if (res_obj[unique_hash]){  // Check if messages exist for the hash
             data = {
                 selected_unique_hash: unique_hash
             }

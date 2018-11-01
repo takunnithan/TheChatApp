@@ -3,16 +3,24 @@
     avatar: 'http://www.gstatic.com/webp/gallery/1.webp',
     messages : {
         JKJLJJKL: [
-            {
+           1: {
                 uuid: '1',
                 sender: 'john',
                 created_at: '10.30 AM',
                 message: 'This is a message from the REDUCER',
                 avatar: 'http://www.gstatic.com/webp/gallery/1.webp',
-                id:0
+                id:1
+            },
+        2: {
+                uuid: '2',
+                sender: 'john',
+                created_at: '10.30 AM',
+                message: 'This is a message from the REDUCER',
+                avatar: 'http://www.gstatic.com/webp/gallery/1.webp',
+                id:2
             }, ...
         ],
-        HUDJDHD: [......]
+    HUDJDHD: [......]
     },
     selected_unique_hash: 'JKJLJJKL',
     user_unique_hash: 'HDHDHDJKD',
@@ -33,3 +41,14 @@ login response = {
 }
 
 
+
+
+-------------
+  Bugs
+  -----
+
+  1. Message Edit doesn't show up right away 
+        - Because store doesn't get updated.
+
+
+        Fix - make the messages a dict 
