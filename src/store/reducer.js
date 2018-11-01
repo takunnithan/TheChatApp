@@ -1,3 +1,9 @@
+// IMP : Always deep clone the state 
+// Reducer need to update the state immutably
+
+// TODO: Constants for Action Type 
+// Create a separate file
+// ===================================================================
 
 const initialState = {}
 
@@ -23,15 +29,8 @@ const reducer = (state=initialState, action) => {
                 messages: newMessages
             };
         case 'LOGIN':
-            createState(state, action.data);
-            if (action.response.login_success === true) {
-                return {
-                    ...state,
-                    logged_in_user: action.response.username,
-                    avatar: action.response.avatar,
-                    user_unique_hash: action.response.unique_hash,
-                };
-            }
+            return createState(state, action.data);
+            
         default:
             return state;
     }
@@ -49,7 +48,7 @@ const createState = (state, actionData) => {
 }
 
 const cloneState = (state) =>{
-    var copy = null;
+    var copy = state;
     return copy;
 }
 

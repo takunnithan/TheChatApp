@@ -39,14 +39,19 @@ export const handleResponse = (response, self) => {
     localStorage.setItem('user_id', res_data.user_id);
     self.setState({error_message:null, username: null, password: null});
     self.props.history.push({pathname: '/chat'});
-    } else {
-    self.setState({error_message: res_data.reason, password: null});
-    }
 
     return {
         type: 'LOGIN',
-        response: res_data
+        data: {
+            logged_in_user: res_data.username,
+            avatar: res_data.avatar,
+            user_unique_hash: res_data.unique_hash
+        }
     };
+    } else {
+    self.setState({error_message: res_data.reason, password: null});
+    return {type: null}
+    }
   }
 
 
