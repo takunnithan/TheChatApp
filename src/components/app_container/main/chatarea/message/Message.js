@@ -6,6 +6,21 @@ import Modal from '../../modal/Modal';
 import DeleteDialog from './edit_component/delete_dialog/DeleteDialog';
 import Backdrop from '../../backdrop/Backdrop';
 
+
+/*
+
+NEED REFACTORING
+
+1. move components to new file
+
+2. Use ES6 and remove the `this` binding
+
+3. Move delete, edit to redux
+
+4. Use simpler ways to replace if else , ternary ops
+
+*/
+
 class Message extends Component {
 
   constructor(props) {

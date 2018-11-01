@@ -10,14 +10,14 @@ const initialState = {}
 const reducer = (state=initialState, action) => {
     switch(action.type) {
         case 'NEW_MESSAGE':
-            createState(state, action.data);
+            //createState(state, action.data);
             return {
                 ...state,
                 messages: action.payload,
                 selected_unique_hash: action.unique_hash
                 }
         case 'SEND_MESSAGE':
-            createState(state, action.data);
+            //createState(state, action.data);
             var newMessages = state.messages.concat(
                 {
                     ...action.response,

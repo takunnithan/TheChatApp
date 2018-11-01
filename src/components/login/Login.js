@@ -57,6 +57,5 @@ const mapDispatchToProps = dispatch => {
           }
       }
   }
-  // self.state.username, self.state.password, self.props.history
 
 export default connect(null, mapDispatchToProps)(Login);

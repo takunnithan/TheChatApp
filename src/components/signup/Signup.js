@@ -4,6 +4,15 @@ import axios from 'axios';
 
 class Signup extends Component {
 
+/*
+
+Needs Refactoring
+
+Move the sign up to Redux - Action
+
+*/
+  
+
   state = {
   error_message: null,
   username: null,

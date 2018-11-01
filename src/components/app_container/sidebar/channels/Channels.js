@@ -4,6 +4,17 @@ import axios from 'axios';
 import Channel from './channel/Channel';
 import { connect } from 'react-redux';
 
+/*
+
+CODE DUPLICATION : Channels -- Direct 
+
+    - Use common components / methods . separate them out
+
+- move APIs to redux
+
+
+*/
+
 class Channels extends Component {
 
     state = {
