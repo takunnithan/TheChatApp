@@ -3,6 +3,7 @@ import classes from './Channels.css';
 import axios from 'axios';
 import Channel from './channel/Channel';
 import { connect } from 'react-redux';
+import {getMessages} from '../../../../store/action/action';
 
 /*
 
@@ -61,17 +62,7 @@ class Channels extends Component {
 const mapDispatchToProps = dispatch => {
     return {
         getGroupMessages: (unique_hash) => {
-            axios(
-                {
-                    method: 'get',
-                    url: 'http://localhost:8000/chat/' + unique_hash + '/?format=json',
-                    headers: {
-                        'auth-token':localStorage.getItem('auth_token'),
-                        'user-id': localStorage.getItem('user_id')
-                    }
-                }).then(response => {
-            dispatch({type: 'NEW_MESSAGE', payload: response.data, unique_hash: unique_hash})
-            });
+            dispatch(getMessages(unique_hash));
         }
     }
 }

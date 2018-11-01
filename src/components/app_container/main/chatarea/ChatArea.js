@@ -42,8 +42,9 @@ class ChatArea extends Component {
 }
 
 const mapStateToProps = state => {
+  var unique_hash =  state.selected_unique_hash;
   return {
-    messages: state.messages
+    messages: state.messages[unique_hash]
   }
 }
 

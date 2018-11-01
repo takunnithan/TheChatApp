@@ -1,5 +1,14 @@
 import axios from 'axios';
 
+
+/*
+
+Helper method for axios -> remove duplicates
+
+Use Constants for URLs, Action Types
+
+*/
+
 export const return_message = (response) => {
     return {
         type: 'SEND_MESSAGE',
@@ -69,5 +78,34 @@ export const loginAction = (self) => {
         }).then(response => {
             dispatch(handleResponse(response, self));
       });
+    }
+}
+
+
+
+export const getMessages = (unique_hash) => {
+    return (dispatch, getState) => {
+        var data = {}
+        var res_obj = JSON.parse(JSON.stringify(getState().messages));
+        if (res_obj[unique_hash]){
+            data = {
+                selected_unique_hash: unique_hash
+            }
+            return dispatch({type: 'SWITCH_CHANNEL', data});
+        }
+        data['selected_unique_hash'] = unique_hash;
+        axios(
+            {
+                method: 'get',
+                url: 'http://localhost:8000/chat/' + unique_hash + '/?format=json',
+                headers: {
+                    'auth-token':localStorage.getItem('auth_token'),
+                    'user-id': localStorage.getItem('user_id')
+                }
+            }).then(response => {
+                res_obj[unique_hash] = response.data;
+                data['messages'] = res_obj;
+                dispatch({type: 'GET_MESSAGES', data:data});
+        });
     }
 }

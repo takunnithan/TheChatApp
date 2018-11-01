@@ -5,30 +5,31 @@
 // Create a separate file
 // ===================================================================
 
-const initialState = {}
+const initialState = {messages:{}}
 
 const reducer = (state=initialState, action) => {
     switch(action.type) {
-        case 'NEW_MESSAGE':
-            //createState(state, action.data);
-            return {
-                ...state,
-                messages: action.payload,
-                selected_unique_hash: action.unique_hash
-                }
-        case 'SEND_MESSAGE':
-            //createState(state, action.data);
-            var newMessages = state.messages.concat(
-                {
-                    ...action.response,
-                    sender: state.logged_in_user,
-                    avatar: state.avatar
-                });
-            return {
-                ...state,
-                messages: newMessages
-            };
+        case 'GET_MESSAGES':
+            return createState(state, action.data);
+
+        // case 'SEND_MESSAGE':
+        //     var oldMessages = state.messages[state.selected_unique_hash]
+        //     if(!oldMessages){
+        //         oldMessages = []
+        //     }
+        //     var newMessages = oldMessages.concat(
+        //         {
+        //             ...action.response,
+        //             sender: state.logged_in_user,
+        //             avatar: state.avatar
+        //         });
+        //         var newState = createState(state, {});
+        //         newState['messages'][state.selected_unique_hash] = newMessages
+        //         return newState;
         case 'LOGIN':
+            return createState(state, action.data);
+        
+        case 'SWITCH_CHANNEL':
             return createState(state, action.data);
             
         default:
@@ -40,25 +41,12 @@ export default reducer;
 
 
 const createState = (state, actionData) => {
-    const newState = cloneState(state);
+    const newState = JSON.parse(JSON.stringify(state));
     return {
         ...newState,
         ...actionData
         }
 }
 
-const cloneState = (state) =>{
-    var copy = state;
-    return copy;
-}
-
-
-// Create a helper function for redux store update
-
-
-// Need the following helper function
-//  1. Deep copying redux store
-//  2. Updating messages for individual channel
-//  3. Updating/Adding whole message for a channel
-
+//  2. Updating messages for individual channel -- Websocket
 
