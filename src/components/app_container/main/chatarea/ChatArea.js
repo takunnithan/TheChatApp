@@ -19,15 +19,18 @@ class ChatArea extends Component {
   }
   
   render() {
-    const messages = this.props.messages.map(message => {
-      return <Message 
-                key={message.id}
-                id={message.id}
-                sender={message.sender} 
-                time={message.created_at} 
-                message={message.message} 
-                avatar={message.avatar} />
-  })
+    var messages = null;
+    if (this.props.messages){
+      messages = this.props.messages.map(message => {
+        return <Message 
+                  key={message.id}
+                  id={message.id}
+                  sender={message.sender} 
+                  time={message.created_at} 
+                  message={message.message} 
+                  avatar={message.avatar} />
+    })
+    }
     return (
       <div className={classes.chat_area} ref="messageList" >
         <div className={classes.messages}>
