@@ -103,7 +103,11 @@ export const getMessages = (unique_hash) => {
                     'user-id': localStorage.getItem('user_id')
                 }
             }).then(response => {
-                res_obj[unique_hash] = response.data;
+                var messages = {}
+                response.data.map(message => {
+                    messages[message.id] = message
+                })
+                res_obj[unique_hash] = messages;
                 data['messages'] = res_obj;
                 dispatch({type: 'GET_MESSAGES', data:data});
         });
@@ -111,7 +115,7 @@ export const getMessages = (unique_hash) => {
 }
 
 export const EditMessage = (self)=> {
-    return (dispatch) => {
+    return (dispatch, getState) => {
     var payload =     {
         "created_at": "2018-09-08T20:10:12Z",
         "message": self.state.update_message
@@ -127,9 +131,13 @@ export const EditMessage = (self)=> {
     },
     data: payload
     });
-    self.setState({ message : self.state.update_message });
     self.setState({ showEdit: false });
-
-    dispatch({type:'LLLL'});
+    self.setState({message: self.state.update_message});
+    var newMessages = JSON.parse(JSON.stringify(getState().messages));
+    var messageToEdit = newMessages[self.state.unique_hash][self.state.message_id]
+    messageToEdit['message'] = self.state.update_message
+    newMessages[self.state.unique_hash][self.state.message_id] = messageToEdit
+    var data = {messages: newMessages}
+    dispatch({type:'EDIT_MESSAGE', data:data});
   }
 }

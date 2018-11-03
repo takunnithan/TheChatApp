@@ -45,6 +45,9 @@ const reducer = (state=initialState, action) => {
         
         case 'SWITCH_CHANNEL':
             return createState(state, action.data);
+
+        case 'EDIT_MESSAGE':
+            return createState(state, action.data);
             
         default:
             return state;

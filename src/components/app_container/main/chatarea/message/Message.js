@@ -34,7 +34,8 @@ class Message extends Component {
       showDelete: false,
       message: props.message,
       message_id: props.id,
-      update_message: props.message
+      update_message: props.message,
+      unique_hash: props.unique_hash
     };
     
     this.editClickHandler = this.editClickHandler.bind(this);

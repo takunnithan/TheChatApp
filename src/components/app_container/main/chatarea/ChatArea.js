@@ -21,14 +21,15 @@ class ChatArea extends Component {
   render() {
     var messages = null;
     if (this.props.messages){
-      messages = this.props.messages.map(message => {
+      messages = Object.values(this.props.messages).map(message => {
         return <Message 
                   key={message.id}
                   id={message.id}
                   sender={message.sender} 
                   time={message.created_at} 
                   message={message.message} 
-                  avatar={message.avatar} />
+                  avatar={message.avatar}
+                  unique_hash={this.props.unique_hash} />
     })
     }
     return (
@@ -44,7 +45,8 @@ class ChatArea extends Component {
 const mapStateToProps = state => {
   var unique_hash =  state.selected_unique_hash;
   return {
-    messages: state.messages[unique_hash]
+    messages: state.messages[unique_hash],
+    unique_hash:  unique_hash
   }
 }
 
