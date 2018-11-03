@@ -12,7 +12,7 @@ const deletediaglog = (props) => (
         </div>
         <div className={classes.button_container}>
         <button className={classes.cancel_button} onClick={props.onCancelHandler}>Cancel</button>
-        <button className={classes.delete_button} onClick={props.onDeleteHandler}>Delete</button>
+        <button className={classes.delete_button} onClick={()=> props.onDeleteHandler(props.self)}>Delete</button>
       </div>
     </div>
 

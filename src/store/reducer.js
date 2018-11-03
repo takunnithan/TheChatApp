@@ -48,6 +48,9 @@ const reducer = (state=initialState, action) => {
 
         case 'EDIT_MESSAGE':
             return createState(state, action.data);
+
+        case 'DELETE_MESSAGE':
+            return createState(state, action.data);
             
         default:
             return state;

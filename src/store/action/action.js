@@ -7,6 +7,10 @@ Helper method for axios -> remove duplicates
 
 Use Constants for URLs, Action Types
 
+Not sure if passing `this` around is a good idea
+
+this = self here.
+
 */
 
 export const return_message = (response) => {
@@ -114,7 +118,19 @@ export const getMessages = (unique_hash) => {
     }
 }
 
-export const EditMessage = (self)=> {
+/*
+
+TODOs:
+------
+Move the dispatch part to the response of API call.
+
+Helps to handle error during API call.
+
+Use axios promises
+
+*/
+
+export const editMessage = (self)=> {
     return (dispatch, getState) => {
     var payload =     {
         "created_at": "2018-09-08T20:10:12Z",
@@ -132,7 +148,14 @@ export const EditMessage = (self)=> {
     data: payload
     });
     self.setState({ showEdit: false });
+
+    // TODO: Its a temporary fix & component should ideally render
+    // after redux store update . 
+    // May be its not rendering for nested value changes
+    //--------------------------------------------------------
     self.setState({message: self.state.update_message});
+    // ------------------------------------------------------
+
     var newMessages = JSON.parse(JSON.stringify(getState().messages));
     var messageToEdit = newMessages[self.state.unique_hash][self.state.message_id]
     messageToEdit['message'] = self.state.update_message
@@ -141,3 +164,21 @@ export const EditMessage = (self)=> {
     dispatch({type:'EDIT_MESSAGE', data:data});
   }
 }
+
+export const deleteMessage = (self)=> {
+    return (dispatch, getState) => {
+        var delete_url = 'http://localhost:8000/messages/' + self.state.message_id +'/';
+        axios({
+          method: 'delete',
+          url: delete_url,
+          headers: {
+            'auth-token':localStorage.getItem('auth_token'),
+            'user-id': localStorage.getItem('user_id')
+        },
+        }
+        );
+        var newMessages = JSON.parse(JSON.stringify(getState().messages));
+        delete newMessages[self.state.unique_hash][self.state.message_id]
+        dispatch({type:'DELETE_MESSAGE', data:{messages:newMessages}});
+      }
+    }

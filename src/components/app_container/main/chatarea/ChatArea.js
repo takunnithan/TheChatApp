@@ -42,6 +42,11 @@ class ChatArea extends Component {
   }
 }
 
+// TODO:
+ 
+// There is something wrong with state to props mapping
+// Component doesn't re render after message edit
+
 const mapStateToProps = state => {
   var unique_hash =  state.selected_unique_hash;
   return {

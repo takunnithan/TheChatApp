@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import classes from './Message.css';
 import Edit from './edit_component/Edit';
-import axios from 'axios';
 import Modal from '../../modal/Modal';
 import DeleteDialog from './edit_component/delete_dialog/DeleteDialog';
 import Backdrop from '../../backdrop/Backdrop';
 import { connect } from 'react-redux';
-import {EditMessage} from '../../../../../store/action/action';
+import {editMessage, deleteMessage} from '../../../../../store/action/action';
 
 
 /*
@@ -16,8 +15,6 @@ NEED REFACTORING
 1. move components to new file
 
 2. Use ES6 and remove the `this` binding
-
-3. Move delete, edit to redux
 
 4. Use simpler ways to replace if else , ternary ops
 
@@ -29,7 +26,6 @@ class Message extends Component {
     super(props);
     
     this.state = {
-      deleted: false,
       showEdit: false,
       showDelete: false,
       message: props.message,
@@ -43,7 +39,6 @@ class Message extends Component {
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onDeleteHandler = this.onDeleteHandler.bind(this);
     this.closeDeleteDialog = this.closeDeleteDialog.bind(this);
-    this.onDeleteButtonHandler = this.onDeleteButtonHandler.bind(this);
     this.onCancelButtonHandler = this.onCancelButtonHandler.bind(this);
   }
 
@@ -53,20 +48,6 @@ class Message extends Component {
     this.setState({ showDelete: true }, () => {
       document.addEventListener('click', this.closeDeleteDialog);
     });
-  }
-
-  onDeleteButtonHandler() {
-    var delete_url = 'http://localhost:8000/messages/' + this.state.message_id +'/';
-    axios({
-      method: 'delete',
-      url: delete_url,
-      headers: {
-        'auth-token':localStorage.getItem('auth_token'),
-        'user-id': localStorage.getItem('user_id')
-    },
-    }
-      );
-    this.setState({ deleted: true });
   }
 
   onCancelButtonHandler() {
@@ -98,9 +79,6 @@ class Message extends Component {
 
   render() {
     return (
-      this.state.deleted
-      ? (null)
-      :(
       <div className={classes.container}>
         <Backdrop show={this.state.showDelete} click={this.closeDeleteDialog}/>
         {
@@ -110,8 +88,9 @@ class Message extends Component {
                   }}>
                   <Modal>
                     <DeleteDialog 
-                          onDeleteHandler={this.onDeleteButtonHandler}
+                          onDeleteHandler={this.props.deleteMessage}
                           onCancelHandler={this.onCancelButtonHandler}
+                          self={this}
                           message={ 
                                     <div className={classes.message_container} >  
                                       <div className={classes.profile_pic_container}>
@@ -166,17 +145,19 @@ class Message extends Component {
       }
       </div>
       )
-    );
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
       saveHandler: (self) => {
-          dispatch(EditMessage(self));
-          }
+          dispatch(editMessage(self));
+          },
+      deleteMessage: (self) => {
+        dispatch(deleteMessage(self));
       }
   }
+}
 
 export default connect(null, mapDispatchToProps)(Message);
 
