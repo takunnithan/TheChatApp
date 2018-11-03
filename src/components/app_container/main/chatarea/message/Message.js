@@ -5,6 +5,8 @@ import axios from 'axios';
 import Modal from '../../modal/Modal';
 import DeleteDialog from './edit_component/delete_dialog/DeleteDialog';
 import Backdrop from '../../backdrop/Backdrop';
+import { connect } from 'react-redux';
+import {EditMessage} from '../../../../../store/action/action';
 
 
 /*
@@ -37,7 +39,6 @@ class Message extends Component {
     
     this.editClickHandler = this.editClickHandler.bind(this);
     this.cancelHandler = this.cancelHandler.bind(this);
-    this.saveHandler = this.saveHandler.bind(this);
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onDeleteHandler = this.onDeleteHandler.bind(this);
     this.closeDeleteDialog = this.closeDeleteDialog.bind(this);
@@ -86,27 +87,6 @@ class Message extends Component {
   }
 
   cancelHandler() {
-    this.setState({ showEdit: false });
-  }
-
-  saveHandler() {
-    var payload =     {
-        "created_at": "2018-09-08T20:10:12Z",
-        "message": this.state.update_message
-    }
-    var patch_url = 'http://localhost:8000/messages/' + this.state.message_id +'/';
-
-    // TODO: Get the response and if status is not 200 then - Failure message / Retry option
-    axios({
-      method: 'patch',
-      url: patch_url,
-      headers: {
-        'auth-token':localStorage.getItem('auth_token'),
-        'user-id': localStorage.getItem('user_id')
-    },
-    data: payload
-    });
-    this.setState({ message : this.state.update_message });
     this.setState({ showEdit: false });
   }
 
@@ -159,8 +139,9 @@ class Message extends Component {
             avatar={this.props.avatar} 
             message={this.state.message}
             cancelHandler={this.cancelHandler}
-            saveHandler={this.saveHandler}
-            onChangeHandler={this.onChangeHandler} />
+            saveHandler={this.props.saveHandler}
+            onChangeHandler={this.onChangeHandler}
+            self={this} />
         )
         :(
           <div className={classes.message_container} >
@@ -188,7 +169,15 @@ class Message extends Component {
   }
 }
 
-export default Message;
+const mapDispatchToProps = dispatch => {
+  return {
+      saveHandler: (self) => {
+          dispatch(EditMessage(self));
+          }
+      }
+  }
+
+export default connect(null, mapDispatchToProps)(Message);
 
 
 class EditDialogBox extends Component {
@@ -214,7 +203,7 @@ class EditDialogBox extends Component {
     </div>
     <div className={classes.edit_button_container}>
         <button className={classes.cancel_button} onClick={this.props.cancelHandler}>Cancel</button>
-        <button className={classes.save_button} onClick={this.props.saveHandler}>Save</button>
+        <button className={classes.save_button} onClick={()=>this.props.saveHandler(this.props.self)}>Save</button>
       </div>
     </div>
     </div>

@@ -109,3 +109,27 @@ export const getMessages = (unique_hash) => {
         });
     }
 }
+
+export const EditMessage = (self)=> {
+    return (dispatch) => {
+    var payload =     {
+        "created_at": "2018-09-08T20:10:12Z",
+        "message": self.state.update_message
+    }
+    var patch_url = 'http://localhost:8000/messages/' + self.state.message_id +'/';
+
+    axios({
+      method: 'patch',
+      url: patch_url,
+      headers: {
+        'auth-token':localStorage.getItem('auth_token'),
+        'user-id': localStorage.getItem('user_id')
+    },
+    data: payload
+    });
+    self.setState({ message : self.state.update_message });
+    self.setState({ showEdit: false });
+
+    dispatch({type:'LLLL'});
+  }
+}
