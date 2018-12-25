@@ -11,13 +11,17 @@
 // Message Edit doesn't show up right away 
 //     - Because store doesn't get updated.
 
-// Fix - make the messages a list of dicts
 
-// Checkout Redux-store-structure file
-// This will work for `delete` too
-// Eventually `edit`, `delete` will be moved from REST to WS.
+/*
 
+Now this looks oversimplified .
 
+Reducer should do something 
+
+    or -- Remove all the action types and keep only ONE.
+        eg: UPDATE_STATE
+
+*/
 
 const initialState = {messages:{}}
 
@@ -26,23 +30,12 @@ const reducer = (state=initialState, action) => {
         case 'GET_MESSAGES':
             return createState(state, action.data);
 
-        // case 'SEND_MESSAGE':
-        //     var oldMessages = state.messages[state.selected_unique_hash]
-        //     if(!oldMessages){
-        //         oldMessages = []
-        //     }
-        //     var newMessages = oldMessages.concat(
-        //         {
-        //             ...action.response,
-        //             sender: state.logged_in_user,
-        //             avatar: state.avatar
-        //         });
-        //         var newState = createState(state, {});
-        //         newState['messages'][state.selected_unique_hash] = newMessages
-        //         return newState;
+        case 'SEND_MESSAGE':
+            return createState(state, action.data);
+
         case 'LOGIN':
             return createState(state, action.data);
-        
+
         case 'SWITCH_CHANNEL':
             return createState(state, action.data);
 
@@ -51,7 +44,7 @@ const reducer = (state=initialState, action) => {
 
         case 'DELETE_MESSAGE':
             return createState(state, action.data);
-            
+
         default:
             return state;
     }

@@ -13,10 +13,10 @@ this = self here.
 
 */
 
-export const return_message = (response) => {
+export const return_message = (newMessages) => {
     return {
         type: 'SEND_MESSAGE',
-        response: response
+        data: {messages:newMessages}
     };
 }
 
@@ -39,7 +39,12 @@ export const send_message = (message) => {
                 },
                 data: payload
             }).then(response => {
-            dispatch(return_message(response.data));
+                var data = response.data
+                console.log(data);
+                var messageId = data.id
+                var newMessages = JSON.parse(JSON.stringify(getState().messages));
+                newMessages[payload.unique_hash][messageId] = data
+                dispatch(return_message(newMessages));
         });
     }
 }
@@ -182,3 +187,15 @@ export const deleteMessage = (self)=> {
         dispatch({type:'DELETE_MESSAGE', data:{messages:newMessages}});
       }
     }
+
+
+export const newMessageFromSocket = (response) => {
+    return (dispatch, getState) => {
+        delete response.command;
+        var unique_hash = response.unique_hash
+        var messageId = response.id
+        var newMessages = JSON.parse(JSON.stringify(getState().messages));
+        newMessages[unique_hash][messageId] = response
+        dispatch(return_message(newMessages));
+    }
+}

@@ -1,6 +1,7 @@
  {
     logged_in_user: 'john',
     avatar: 'http://www.gstatic.com/webp/gallery/1.webp',
+    user_unique_hash: 'HDHDHDJKD',
     messages : {
         JKJLJJKL: [
            1: {
@@ -23,7 +24,6 @@
     HUDJDHD: [......]
     },
     selected_unique_hash: 'JKJLJJKL',
-    user_unique_hash: 'HDHDHDJKD',
     direct_chat_list: [{name: 'john', unique_hash: 'JKDJK'}, ...],
     channel_list: [{name: 'general', unique_hash: 'JKDJK'}, ...]
     new_messages: [ list of Channels , direct which has new messages]
