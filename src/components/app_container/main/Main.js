@@ -4,11 +4,14 @@ import Top from './top/Top';
 import ChatBox from './chatbox/ChatBox';
 import ChatArea from './chatarea/ChatArea';
 import SocketInstance from '../socket/Socket';
+import { connect } from 'react-redux';
+import {newMessageFromSocket} from '../../../store/action/action';
 
 class Main extends Component {
 
   componentDidMount(){
-    SocketInstance.connect();
+    SocketInstance.connect('config');
+    SocketInstance.addCallbacks(this.props.onNewMessage);
   }
 
   render() {
@@ -22,4 +25,12 @@ class Main extends Component {
   }
 }
 
-export default Main;
+const mapDispatchToProps = dispatch => {
+  return {
+      onNewMessage: (response) => {
+          dispatch(newMessageFromSocket(response));
+          }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Main);

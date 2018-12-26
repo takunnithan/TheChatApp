@@ -1,5 +1,4 @@
 import {newMessageFromSocket} from '../../../store/action/action';
-
 class SocketCon {
     static instance = null;
 
@@ -10,17 +9,20 @@ class SocketCon {
         return SocketCon.instance;
     }
 
-    callbacks = {};
+    callbacks = {}
 
     constructor() {
         this.socketRef = null;
     }
 
-    connect() {
-        const url = 'ws://127.0.0.1:8000/ws/chat/abcd/';
+
+
+    connect(unique_hash) {
+        var user_id = localStorage.getItem('user_id');
+        const url = 'ws://127.0.0.1:8000/ws/chat/' + user_id +  '/' + unique_hash + '/';
         this.socketRef = new WebSocket(url);
         this.socketRef.onopen = () => {
-            console.log('Socket connection successful!')
+            console.log('Socket connection successful!');
         }
         this.socketRef.onerror = e => {
             console.log('Error during socket connection', e);

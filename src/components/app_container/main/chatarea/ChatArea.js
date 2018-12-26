@@ -3,7 +3,6 @@ import classes from './ChatArea.css';
 import Message from './message/Message';
 import { connect } from 'react-redux';
 import * as ReactDOM from 'react-dom';
-import {newMessageFromSocket} from '../../../../store/action/action';
 import SocketInstance from '../../socket/Socket';
 
 
@@ -11,8 +10,8 @@ class ChatArea extends Component {
 
   constructor(props) {
     super(props);
-    SocketInstance.addCallbacks(props.onNewMessage);
   }
+
 
   scrollToBottom = () => {
     const { messageList } = this.refs;
@@ -63,12 +62,4 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-      onNewMessage: (response) => {
-          dispatch(newMessageFromSocket(response));
-          }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ChatArea);
+export default connect(mapStateToProps, null)(ChatArea);

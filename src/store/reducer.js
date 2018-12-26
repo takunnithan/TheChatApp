@@ -45,6 +45,9 @@ const reducer = (state=initialState, action) => {
         case 'DELETE_MESSAGE':
             return createState(state, action.data);
 
+        case 'ADD_CHANNELS':
+        return createState(state, action.data);
+
         default:
             return state;
     }

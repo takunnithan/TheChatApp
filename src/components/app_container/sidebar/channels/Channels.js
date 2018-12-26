@@ -3,7 +3,7 @@ import classes from './Channels.css';
 import axios from 'axios';
 import Channel from './channel/Channel';
 import { connect } from 'react-redux';
-import {getMessages} from '../../../../store/action/action';
+import {getMessages, getChatList} from '../../../../store/action/action';
 
 /*
 
@@ -19,27 +19,16 @@ CODE DUPLICATION : Channels -- Direct
 class Channels extends Component {
 
     state = {
-        channels: [],
         li_css_class: 'channel_list_li'
     }
 
-  componentDidMount(){
-        axios(
-            {
-                method: 'get',
-                url: 'http://localhost:8000/group/?user_id='+localStorage.getItem('user_id')+'&format=json',
-                headers: {
-                    'auth-token':localStorage.getItem('auth_token'),
-                    'user-id': localStorage.getItem('user_id')
-                }
-            }
-        ).then(response => {
-            this.setState({channels: response.data})
-        });
+    componentWillMount(){
+        this.props.getChannels();
     }
 
+
   render() {
-      const channels = this.state.channels.map(channel => {
+      const channels = this.props.channels.map(channel => {
           return <li className={this.state.li_css_class} key={channel.id} onClick={()=>this.props.getGroupMessages(channel.unique_hash)}>
                     <Channel 
                         name={channel.group_name} 
@@ -63,8 +52,18 @@ const mapDispatchToProps = dispatch => {
     return {
         getGroupMessages: (unique_hash) => {
             dispatch(getMessages(unique_hash));
+        },
+        getChannels: () => {
+            dispatch(getChatList('channels'));
         }
     }
 }
 
-export default connect(null, mapDispatchToProps)(Channels);
+const mapStateToProps = state => {
+    return {
+      channels: state.channels ? state.channels : []
+    }
+  }
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Channels);

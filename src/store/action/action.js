@@ -1,4 +1,5 @@
 import axios from 'axios';
+import SocketInstance from '../../components/app_container/socket/Socket';
 
 
 /*
@@ -195,7 +196,37 @@ export const newMessageFromSocket = (response) => {
         var unique_hash = response.unique_hash
         var messageId = response.id
         var newMessages = JSON.parse(JSON.stringify(getState().messages));
+        if (newMessages[unique_hash] == null){
+            console.log('AGAIN');
+            console.log(newMessages[unique_hash]);
+            newMessages[unique_hash] = {}
+        }
         newMessages[unique_hash][messageId] = response
         dispatch(return_message(newMessages));
+    }
+}
+
+export const getChatList = (type) => {
+    return (dispatch, getState) => {
+        var url_type = type === 'direct' ? 'direct' : 'group'
+        axios(
+            {
+                method: 'get',
+                url: 'http://localhost:8000/' + url_type + '/?user_id='+localStorage.getItem('user_id')+'&format=json',
+                headers: {
+                    'auth-token':localStorage.getItem('auth_token'),
+                    'user-id': localStorage.getItem('user_id')
+                }
+            }
+        ).then(response => {
+            var data = {}
+            var list_type = type === 'direct' ? 'direct_chats' : 'channels'
+            data[list_type] = response.data
+            response.data.map(item => {
+                SocketInstance.connect(item.unique_hash);
+            });
+            dispatch({type: 'ADD_CHANNELS', data:data});
+        });
+
     }
 }
