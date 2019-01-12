@@ -19,7 +19,8 @@ class SocketCon {
 
     connect(unique_hash) {
         var user_id = localStorage.getItem('user_id');
-        const url = 'ws://127.0.0.1:8000/ws/chat/' + user_id +  '/' + unique_hash + '/';
+        // const url = 'ws://127.0.0.1:8000/ws/chat/' + user_id +  '/' + unique_hash + '/';
+        const url = 'ws://127.0.0.1:8000/ws/chat/' + user_id +  '/';
         this.socketRef = new WebSocket(url);
         this.socketRef.onopen = () => {
             console.log('Socket connection successful!');

@@ -7,7 +7,7 @@ class ChatBox extends Component {
 
   constructor(props) {
     super(props);
-    this.WaitForSocketConnection();
+    // this.WaitForSocketConnection();
   }
 
   WaitForSocketConnection() {
@@ -44,7 +44,8 @@ class ChatBox extends Component {
       console.log('Other keys!!!');
       data = {
         'command': 'typing_status',
-        'user': localStorage.getItem('user_id')
+        'user': localStorage.getItem('user_id'),
+        'unique_hash': this.props.unique_hash
       }
       SocketInstance.sendMessage(data);
     }

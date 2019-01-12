@@ -222,9 +222,6 @@ export const getChatList = (type) => {
             var data = {}
             var list_type = type === 'direct' ? 'direct_chats' : 'channels'
             data[list_type] = response.data
-            response.data.map(item => {
-                SocketInstance.connect(item.unique_hash);
-            });
             dispatch({type: 'ADD_CHANNELS', data:data});
         });
 
