@@ -5,16 +5,11 @@ import SocketInstance from '../../socket/Socket';
 
 class ChatBox extends Component {
 
-  constructor(props) {
-    super(props);
-    // this.WaitForSocketConnection();
-  }
-
   WaitForSocketConnection() {
     const component = this;
     setTimeout(
       function() {
-        if (SocketInstance.getState() == 1) {
+        if (SocketInstance.getState() === 1) {
           console.log('Connection successful');
           return;
         }

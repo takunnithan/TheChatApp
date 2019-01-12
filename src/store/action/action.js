@@ -1,5 +1,4 @@
 import axios from 'axios';
-import SocketInstance from '../../components/app_container/socket/Socket';
 
 
 /*

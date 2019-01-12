@@ -3,7 +3,6 @@ import classes from './DirectChat.css';
 import Chat from './chat/Chat';
 import { connect } from 'react-redux';
 import {getMessages, getChatList} from '../../../../store/action/action';
-import SocketInstance from '../../socket/Socket';
    
 class DirectChat extends Component {
 

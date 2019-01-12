@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import classes from './Channels.css';
-import axios from 'axios';
 import Channel from './channel/Channel';
 import { connect } from 'react-redux';
 import {getMessages, getChatList} from '../../../../store/action/action';

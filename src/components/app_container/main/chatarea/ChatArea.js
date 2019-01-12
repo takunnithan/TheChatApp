@@ -3,15 +3,9 @@ import classes from './ChatArea.css';
 import Message from './message/Message';
 import { connect } from 'react-redux';
 import * as ReactDOM from 'react-dom';
-import SocketInstance from '../../socket/Socket';
 
 
 class ChatArea extends Component {
-
-  constructor(props) {
-    super(props);
-  }
-
 
   scrollToBottom = () => {
     const { messageList } = this.refs;

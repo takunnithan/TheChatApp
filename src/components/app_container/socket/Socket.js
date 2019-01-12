@@ -1,4 +1,3 @@
-import {newMessageFromSocket} from '../../../store/action/action';
 class SocketCon {
     static instance = null;
 

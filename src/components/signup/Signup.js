@@ -35,6 +35,7 @@ Move the sign up to Redux - Action
       case 'fullname':
        this.setState({fullname: e.target.value});
         break;
+      default:
     }
   }
 
