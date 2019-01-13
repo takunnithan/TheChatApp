@@ -25,21 +25,21 @@
 }
 
 .channel {
-    position: absolute;
     font-size: 18px;
     top: 12%;
     left: 15px;
 }
 
 .direct {
-    position: absolute;
     top: 53%;
     font-size: 18px;
     left: 15px;
+    display: inline-block;
+    width: 80%;
+    padding-left: 10px;
 }
 
 .direct_list{
-    position: absolute;
     font-size: 16px;
     top: 57%;
     width: 100%;
@@ -59,4 +59,12 @@
 
 .direct_list li:hover {
     background-color: #5f99a7
+}
+
+.plus_icon{
+    display: inline-block;
+}
+
+.direct_container {
+    cursor: pointer;
 }

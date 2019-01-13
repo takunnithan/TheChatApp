@@ -226,3 +226,22 @@ export const getChatList = (type) => {
 
     }
 }
+
+
+export const showChatSearch = (type) => {
+    return (dispatch) =>{
+        var data = {}
+        var list_type = type === 'direct' ? 'show_direct_chat_search' : 'show_channels_search'
+        data[list_type] = true
+        dispatch({type: 'SHOW_CHAT_SEARCH', data:data});
+    }
+}
+
+export const disableChatSearch = (type) => {
+    return (dispatch) => {
+        var data = {}
+        var data_type = type === 'direct' ? 'show_direct_chat_search' : 'show_channels_search'
+        data[data_type] = false
+        dispatch({type: 'DISABLE_CHAT_SEARCH', data:data});
+    }
+}

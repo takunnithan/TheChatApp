@@ -6,7 +6,7 @@ import ChatArea from './chatarea/ChatArea';
 import SocketInstance from '../socket/Socket';
 import { connect } from 'react-redux';
 import {newMessageFromSocket} from '../../../store/action/action';
-import DirectSearch from '../../app_container/main/search/direct/Direct'
+import DirectSearch from '../search/direct/DirectSearch';
 
 class Main extends Component {
 

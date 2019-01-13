@@ -23,7 +23,7 @@ Reducer should do something
 
 */
 
-const initialState = {messages:{}}
+const initialState = {messages:{}, show_direct_chat_search:false}
 
 const reducer = (state=initialState, action) => {
     switch(action.type) {
@@ -46,6 +46,12 @@ const reducer = (state=initialState, action) => {
             return createState(state, action.data);
 
         case 'ADD_CHANNELS':
+        return createState(state, action.data);
+
+        case 'SHOW_CHAT_SEARCH':
+        return createState(state, action.data);
+
+        case 'DISABLE_CHAT_SEARCH':
         return createState(state, action.data);
 
         default:
