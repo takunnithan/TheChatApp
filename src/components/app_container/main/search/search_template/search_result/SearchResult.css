@@ -1,0 +1,12 @@
+.search_result {
+    height: 60px;
+    border-width: 1px 0 1px 0;
+    border-color: #D3D3D3;
+    border-style: solid;
+    cursor: pointer;
+}
+
+.search_result:hover {
+    border-width: 1px;
+    border-radius: 5px;
+}

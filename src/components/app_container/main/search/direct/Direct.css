@@ -1,0 +1,69 @@
+.search_template {
+    height: 100%;
+    width: 100%;
+}
+
+.search_result_container {
+    height: 100%;
+    width: 100%;
+}
+
+.search_box_container {
+    height: 100%;
+    width: 100%;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+.search_box_div {
+    height: 100%;
+    width: 80%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.search_button_div {
+    height: 100%;
+    width: 15%;
+    display: inline-block;
+    margin-left: 20px;
+    vertical-align: top;
+}
+
+.search_box{
+    width: 100%;
+    height: 35px;
+    border-radius: 5px;
+    border: 2px solid #BCBCBD;
+    font-size: 17px;
+    font-weight: 200;
+}
+
+.search_box:focus {
+    border-color: #696969;
+    outline: none;
+}
+
+.search_button {
+    height: 41px;
+    width: 93%;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+
+
+}
+
+.search_result {
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+.contact_list_title{
+    font-size: 13px;
+    color: #808080;
+}

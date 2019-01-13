@@ -6,6 +6,7 @@ import ChatArea from './chatarea/ChatArea';
 import SocketInstance from '../socket/Socket';
 import { connect } from 'react-redux';
 import {newMessageFromSocket} from '../../../store/action/action';
+import DirectSearch from '../../app_container/main/search/direct/Direct'
 
 class Main extends Component {
 
@@ -17,6 +18,7 @@ class Main extends Component {
   render() {
     return (
       <div className={classes.main} >
+        <DirectSearch />
         <Top />
         <ChatArea sock={this.sock}/>
         <div className={classes.chatbox} ><ChatBox /></div>
