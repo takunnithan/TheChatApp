@@ -9,7 +9,8 @@ import axios from 'axios';
 class DirectSearch extends Component{
 
     state = {
-        results: []
+        results: [],
+        selected: null
     }
 
     userSearch = (event) => {
@@ -33,11 +34,21 @@ class DirectSearch extends Component{
         }
     }
 
+    selectHandler = (event) => {
+        this.setState({selected: Number(event.target.getAttribute('user_id'))});
+    }
+
     render() {
         var users = null;
         if (this.state.results){
           users = Object.values(this.state.results).map(user => {
-            return <a key={user.user_id}><SearchResult><h3>{user.user_name}</h3></SearchResult></a>
+            return <SearchResult 
+                        key={user.user_id} 
+                        user_id={user.user_id} 
+                        selected_user={this.state.selected}
+                        selectHandler={this.selectHandler}
+                        user_name={user.user_name}>
+                   </SearchResult>
         })
         }
         return (
