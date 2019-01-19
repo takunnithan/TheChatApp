@@ -4,6 +4,7 @@ import SearchResult from '../search_template/search_result/SearchResult';
 import classes from './DirectSearch.css';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import {createDirectChat} from '../../../../store/action/action';
 
 
 class DirectSearch extends Component{
@@ -58,7 +59,9 @@ class DirectSearch extends Component{
                     <div className={classes.search_box_div}>
                         <input className={classes.search_box} placeholder='Search for users' onKeyUp={this.userSearch} />
                     </div>
-                    <div className={classes.search_button_div}><button className={classes.search_button}>Go</button></div>
+                    <div className={classes.search_button_div}>
+                        <button className={classes.search_button} onClick={()=>this.props.createChat(this.state.selected)}>Go</button>
+                    </div>
                 </div>
                 <div className={classes.search_result_container}>
                     <div className={classes.contact_list_title}>Contact List</div>
@@ -79,4 +82,12 @@ const mapStateToProps = state => {
     }
   }
 
-export default connect(mapStateToProps, null)(DirectSearch);
+  const mapDispatchToProps = dispatch => {
+    return {
+        createChat: (recipient_id) => {
+            dispatch(createDirectChat(recipient_id));
+            }
+    }
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(DirectSearch);

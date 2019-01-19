@@ -245,3 +245,36 @@ export const disableChatSearch = (type) => {
         dispatch({type: 'DISABLE_CHAT_SEARCH', data:data});
     }
 }
+
+
+export const createDirectChat = (recipient_id) => {
+    return (dispatch, getState) => {
+        var payload = {
+            user_id : localStorage.getItem('user_id'),
+            recipient : recipient_id
+          }
+        axios(
+            {
+                method: 'post',
+                url: 'http://localhost:8000/direct/',
+                headers: {
+                    'auth-token':localStorage.getItem('auth_token'),
+                    'user-id': localStorage.getItem('user_id')
+                },
+                data: payload
+            }
+        ).then(response => {
+            var data = {}
+            var direct_chats = JSON.parse(JSON.stringify(getState().direct_chats));
+            direct_chats.push(response.data);
+            data['direct_chats'] = direct_chats
+            var channel = {
+                selected_unique_hash: response.data.unique_hash
+            }
+            dispatch(disableChatSearch('direct'));
+            dispatch({type: 'ADD_CHANNELS', data:data});
+            dispatch(getMessages(response.data.unique_hash));
+            dispatch({type: 'SWITCH_CHANNEL', data:channel});
+        });
+    }
+}
