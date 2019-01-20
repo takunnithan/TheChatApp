@@ -218,9 +218,15 @@ export const getChatList = (type) => {
                 }
             }
         ).then(response => {
+            var channels = {}
             var data = {}
             var list_type = type === 'direct' ? 'direct_chats' : 'channels'
-            data[list_type] = response.data
+            var channel_list = response.data;
+            channel_list.map(channel => {
+                channels[channel.unique_hash] = channel;
+            })
+            data[list_type] = channels;
+            console.log(channels);
             dispatch({type: 'ADD_CHANNELS', data:data});
         });
 
@@ -266,14 +272,18 @@ export const createDirectChat = (recipient_id) => {
         ).then(response => {
             var data = {}
             var direct_chats = JSON.parse(JSON.stringify(getState().direct_chats));
-            direct_chats.push(response.data);
-            data['direct_chats'] = direct_chats
+            var unique_hash = response.data.unique_hash;
             var channel = {
-                selected_unique_hash: response.data.unique_hash
+                selected_unique_hash: unique_hash
             }
+            if (direct_chats[unique_hash]){
+                dispatch({type: 'SWITCH_CHANNEL', data:channel});
+            }
+            direct_chats[unique_hash] = response.data;
+            data['direct_chats'] = direct_chats
             dispatch(disableChatSearch('direct'));
             dispatch({type: 'ADD_CHANNELS', data:data});
-            dispatch(getMessages(response.data.unique_hash));
+            dispatch(getMessages(unique_hash));
             dispatch({type: 'SWITCH_CHANNEL', data:channel});
         });
     }

@@ -11,15 +11,17 @@ class DirectChat extends Component {
     }
 
   render() {
-      const direct_chats = this.props.direct_chats.map(direct => {
-          return <li key={direct.unique_hash} onClick={()=>this.props.getGroupMessages(direct.unique_hash)}>
+    const direct_chats = []
+        for (const key of Object.keys(this.props.direct_chats)) {
+            const direct = this.props.direct_chats[key];
+            direct_chats.push(<li key={direct.unique_hash} onClick={()=>this.props.getGroupMessages(direct.unique_hash)}>
                     <Chat 
                         key={direct.unique_hash}
                         name={direct.username} 
                         unique_hash={direct.unique_hash}
                         created_at={direct.created_at}/>
-                </li>
-      })
+                </li>);
+        }
     return (
         <div className={classes.channel_list}>
           <ul>

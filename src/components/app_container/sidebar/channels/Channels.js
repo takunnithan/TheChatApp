@@ -27,16 +27,19 @@ class Channels extends Component {
 
 
   render() {
-      const channels = this.props.channels.map(channel => {
-          return <li className={this.state.li_css_class} key={channel.id} onClick={()=>this.props.getGroupMessages(channel.unique_hash)}>
-                    <Channel 
-                        name={channel.group_name} 
-                        unique_hash={channel.unique_hash}
-                        avatar={channel.avatar}
-                        settings={channel.settings}
-                        created_at={channel.created_at}/>
-                </li>
-      })
+
+    const channels = []
+    for (const key of Object.keys(this.props.channels)) {
+        const channel = this.props.channels[key];
+        channels.push(<li className={this.state.li_css_class} key={channel.id} onClick={()=>this.props.getGroupMessages(channel.unique_hash)}>
+                        <Channel 
+                            name={channel.group_name} 
+                            unique_hash={channel.unique_hash}
+                            avatar={channel.avatar}
+                            settings={channel.settings}
+                            created_at={channel.created_at}/>
+                    </li>);
+    }
     return (
         <div className={classes.channel_list}>
           <ul>
