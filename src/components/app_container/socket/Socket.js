@@ -22,13 +22,10 @@ class SocketCon {
         const url = 'ws://127.0.0.1:8000/ws/chat/' + user_id +  '/';
         this.socketRef = new WebSocket(url);
         this.socketRef.onopen = () => {
-            console.log('Socket connection successful!');
         }
         this.socketRef.onerror = e => {
-            console.log('Error during socket connection', e);
         }
         this.socketRef.onclose = () => {
-            console.log('Socket connection closed');
         }
         this.socketRef.onmessage = this.onNewMessage.bind(this);
     }
@@ -40,7 +37,7 @@ class SocketCon {
             this.callbacks[command](parsedData.message);
         }
         else if (command === 'typing') {
-            console.log(parsedData.message.user + ' is typing');
+            // TODO: Typing status
         }
     }
 
@@ -53,7 +50,6 @@ class SocketCon {
             this.socketRef.send(JSON.stringify(data));
         }
         catch (e) {
-            console.log(e.message);
         }
     }
 

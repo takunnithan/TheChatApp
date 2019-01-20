@@ -10,11 +10,9 @@ class ChatBox extends Component {
     setTimeout(
       function() {
         if (SocketInstance.getState() === 1) {
-          console.log('Connection successful');
           return;
         }
         else {
-          console.log('waiting for connection');
           component.WaitForSocketConnection();
         }
       },100);
@@ -22,7 +20,6 @@ class ChatBox extends Component {
 
   SendMessages = (event) => {
     if (event.key === 'Enter') {
-      console.log('Enter  key!!!');
       var message = event.target.value;
       event.target.value = '';
       if (message){
@@ -36,7 +33,6 @@ class ChatBox extends Component {
       }
     }
     else {
-      console.log('Other keys!!!');
       data = {
         'command': 'typing_status',
         'user': localStorage.getItem('user_id'),

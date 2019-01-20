@@ -14,14 +14,21 @@
 }
 
 .user{
+    display: inline-block;
     font-size: 17px;
     padding-top: 10px;
     text-align: right;
-    padding-right: 30px;
     cursor: pointer;
+    margin-left: 10px;
 }
 .user:hover {
     font-weight: 500;
+}
+
+.logout {
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 110px;
 }
 
 .channel {

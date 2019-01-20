@@ -40,7 +40,6 @@ export const send_message = (message) => {
                 data: payload
             }).then(response => {
                 var data = response.data
-                console.log(data);
                 var messageId = data.id
                 var newMessages = JSON.parse(JSON.stringify(getState().messages));
                 newMessages[payload.unique_hash][messageId] = data
@@ -55,20 +54,17 @@ export const handleResponse = (response, self) => {
     localStorage.setItem('is_logged_in', true);
     localStorage.setItem('auth_token', res_data.token);
     localStorage.setItem('user_id', res_data.user_id);
+    localStorage.setItem('username', res_data.username);
     self.setState({error_message:null, username: null, password: null});
-    self.props.history.push({pathname: '/chat'});
 
     return {
-        type: 'LOGIN',
-        data: {
-            logged_in_user: res_data.username,
-            avatar: res_data.avatar,
-            user_unique_hash: res_data.unique_hash
-        }
-    };
+            type: 'LOGIN',
+            data: {
+                logged_in_user: res_data.username,
+            }
+    }
     } else {
     self.setState({error_message: res_data.reason, password: null});
-    return {type: null}
     }
   }
 
@@ -85,7 +81,11 @@ export const loginAction = (self) => {
           url:login_url,
           data:payload
         }).then(response => {
-            dispatch(handleResponse(response, self));
+            var res = handleResponse(response, self)
+            if (res){
+                dispatch({type: res['type'], data:res.data});
+                self.props.history.push({pathname: '/chat'});
+            }
       });
     }
 }
@@ -196,8 +196,6 @@ export const newMessageFromSocket = (response) => {
         var messageId = response.id
         var newMessages = JSON.parse(JSON.stringify(getState().messages));
         if (newMessages[unique_hash] == null){
-            console.log('AGAIN');
-            console.log(newMessages[unique_hash]);
             newMessages[unique_hash] = {}
         }
         newMessages[unique_hash][messageId] = response
@@ -226,7 +224,6 @@ export const getChatList = (type) => {
                 channels[channel.unique_hash] = channel;
             })
             data[list_type] = channels;
-            console.log(channels);
             dispatch({type: 'ADD_CHANNELS', data:data});
         });
 
@@ -285,6 +282,46 @@ export const createDirectChat = (recipient_id) => {
             dispatch({type: 'ADD_CHANNELS', data:data});
             dispatch(getMessages(unique_hash));
             dispatch({type: 'SWITCH_CHANNEL', data:channel});
+        });
+    }
+}
+
+export const joinChannel = (unique_hash) => {
+    return (dispatch, getState) => {
+        var payload = {
+            user_id : localStorage.getItem('user_id'),
+            unique_hash : unique_hash
+          }
+        axios(
+            {
+                method: 'post',
+                url: 'http://localhost:8000/group/join',
+                headers: {
+                    'auth-token':localStorage.getItem('auth_token'),
+                    'user-id': localStorage.getItem('user_id')
+                },
+                data: payload
+            }
+        ).then(response => {
+            var data = {}
+            var channels = JSON.parse(JSON.stringify(getState().channels));
+            var unique_hash = response.data.unique_hash;
+            var channel = {
+                selected_unique_hash: unique_hash
+            }
+            if (channels[unique_hash]){
+                dispatch(getMessages(unique_hash));
+                dispatch({type: 'SWITCH_CHANNEL', data:channel});
+                dispatch(disableChatSearch('channels'));
+            }
+            else {
+                channels[unique_hash] = response.data;
+                data['channels'] = channels
+                dispatch(disableChatSearch('channels'));
+                dispatch({type: 'ADD_CHANNELS', data:data});
+                dispatch(getMessages(unique_hash));
+                dispatch({type: 'SWITCH_CHANNEL', data:channel});
+            }
         });
     }
 }

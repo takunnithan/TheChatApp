@@ -4,7 +4,7 @@ import SearchResult from '../search_template/search_result/SearchResult';
 import classes from './GroupSearch.css';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import {createDirectChat} from '../../../../store/action/action';
+import {joinChannel} from '../../../../store/action/action';
 
 
 class GroupSearch extends Component{
@@ -36,7 +36,7 @@ class GroupSearch extends Component{
     }
 
     selectHandler = (event) => {
-        this.setState({selected: event.target.getAttribute('unique_hash')});
+        this.setState({selected: event.target.getAttribute('id')});
     }
 
     render() {
@@ -45,10 +45,10 @@ class GroupSearch extends Component{
           users = Object.values(this.state.results).map(channel => {
             return <SearchResult 
                         key={channel.unique_hash} 
-                        unique_hash={channel.unique_hash} 
-                        selected_channel={this.state.selected}
+                        id={channel.unique_hash}
+                        selected={this.state.selected}
                         selectHandler={this.selectHandler}
-                        user_name={channel.channel_name}>
+                        name={channel.channel_name}>
                    </SearchResult>
         })
         }
@@ -60,7 +60,7 @@ class GroupSearch extends Component{
                         <input className={classes.search_box} placeholder='Search for channels' onKeyUp={this.groupSearch} />
                     </div>
                     <div className={classes.search_button_div}>
-                        <button className={classes.search_button} onClick={()=>this.props.createChat(this.state.selected)}>Go</button>
+                        <button className={classes.search_button} onClick={()=>this.props.joinChannels(this.state.selected)}>Go</button>
                     </div>
                 </div>
                 <div className={classes.search_result_container}>
@@ -83,8 +83,8 @@ const mapStateToProps = state => {
 
   const mapDispatchToProps = dispatch => {
     return {
-        createChat: (recipient_id) => {
-            dispatch(createDirectChat(recipient_id));
+        joinChannels: (unique_hash) => {
+            dispatch(joinChannel(unique_hash));
             }
     }
   }

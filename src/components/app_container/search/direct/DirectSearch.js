@@ -36,7 +36,7 @@ class DirectSearch extends Component{
     }
 
     selectHandler = (event) => {
-        this.setState({selected: Number(event.target.getAttribute('user_id'))});
+        this.setState({selected: Number(event.target.getAttribute('id'))});
     }
 
     render() {
@@ -45,10 +45,10 @@ class DirectSearch extends Component{
           users = Object.values(this.state.results).map(user => {
             return <SearchResult 
                         key={user.user_id} 
-                        user_id={user.user_id} 
-                        selected_user={this.state.selected}
+                        id={user.user_id} 
+                        selected={this.state.selected}
                         selectHandler={this.selectHandler}
-                        user_name={user.user_name}>
+                        name={user.user_name}>
                    </SearchResult>
         })
         }

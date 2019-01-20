@@ -6,14 +6,29 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
 import {showChatSearch} from '../../../store/action/action';
+import { withRouter } from 'react-router-dom'
+
 
 class Sidebar extends Component {
 
   render() {
+    const Logout = withRouter(({ history }) => (
+      <div
+        className={classes.logout}
+        onClick={() => { 
+          localStorage.clear();
+          history.push('/'); 
+        }}
+      >logout</div>
+    ))
+
     return (
       <div className={classes.sidebar}>
         <div className={classes.app_title} >TheChatApp</div>
-        <div className={classes.user}>john</div>
+        <div>
+          <div className={classes.user}>{localStorage.getItem('username')}</div>
+          <Logout />
+        </div>
 
         <div className={classes.list_container} onClick={this.props.showGroupSearch}>
         <div className={classes.channel}>Channels</div> 
