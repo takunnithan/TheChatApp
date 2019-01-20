@@ -23,7 +23,11 @@ Reducer should do something
 
 */
 
-const initialState = {messages:{}, show_direct_chat_search:false}
+const initialState = {
+    messages:{}, 
+    show_direct_chat_search:false,
+    show_channels_search:false
+}
 
 const reducer = (state=initialState, action) => {
     switch(action.type) {

@@ -25,15 +25,16 @@
 }
 
 .channel {
+    top: 15%;
     font-size: 18px;
-    top: 12%;
-    left: 15px;
+    display: inline-block;
+    width: 80%;
+    padding-left: 10px;
 }
 
 .direct {
     top: 53%;
     font-size: 18px;
-    left: 15px;
     display: inline-block;
     width: 80%;
     padding-left: 10px;
@@ -65,6 +66,7 @@
     display: inline-block;
 }
 
-.direct_container {
+.list_container {
+    padding-top: 20px;
     cursor: pointer;
 }
