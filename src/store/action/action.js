@@ -32,7 +32,7 @@ export const send_message = (message) => {
         axios(
             {
                 method: 'post',
-                url: 'http://localhost:8000/messages/',
+                url: 'https://takunnithan.com/api/messages/',
                 headers: {
                     'auth-token':localStorage.getItem('auth_token'),
                     'user-id': user_id
@@ -71,7 +71,7 @@ export const handleResponse = (response, self) => {
 
 export const loginAction = (self) => {
     return (dispatch) => {
-        var login_url = 'http://localhost:8000/login/';
+        var login_url = 'https://takunnithan.com/api/login/';
         var payload = {
             username: self.state.username,
             password: self.state.password
@@ -106,7 +106,7 @@ export const getMessages = (unique_hash) => {
         axios(
             {
                 method: 'get',
-                url: 'http://localhost:8000/chat/' + unique_hash + '/?format=json',
+                url: 'https://takunnithan.com/api/chat/' + unique_hash + '/?format=json',
                 headers: {
                     'auth-token':localStorage.getItem('auth_token'),
                     'user-id': localStorage.getItem('user_id')
@@ -141,7 +141,7 @@ export const editMessage = (self)=> {
         "created_at": "2018-09-08T20:10:12Z",
         "message": self.state.update_message
     }
-    var patch_url = 'http://localhost:8000/messages/' + self.state.message_id +'/';
+    var patch_url = 'https://takunnithan.com/api/messages/' + self.state.message_id +'/';
 
     axios({
       method: 'patch',
@@ -209,7 +209,7 @@ export const getChatList = (type) => {
         axios(
             {
                 method: 'get',
-                url: 'http://localhost:8000/' + url_type + '/?user_id='+localStorage.getItem('user_id')+'&format=json',
+                url: 'https://takunnithan.com/api/' + url_type + '/?user_id='+localStorage.getItem('user_id')+'&format=json',
                 headers: {
                     'auth-token':localStorage.getItem('auth_token'),
                     'user-id': localStorage.getItem('user_id')
@@ -259,7 +259,7 @@ export const createDirectChat = (recipient_id) => {
         axios(
             {
                 method: 'post',
-                url: 'http://localhost:8000/direct/',
+                url: 'https://takunnithan.com/api/direct/',
                 headers: {
                     'auth-token':localStorage.getItem('auth_token'),
                     'user-id': localStorage.getItem('user_id')
@@ -295,7 +295,7 @@ export const joinChannel = (unique_hash) => {
         axios(
             {
                 method: 'post',
-                url: 'http://localhost:8000/group/join',
+                url: 'https://takunnithan.com/api/group/join',
                 headers: {
                     'auth-token':localStorage.getItem('auth_token'),
                     'user-id': localStorage.getItem('user_id')

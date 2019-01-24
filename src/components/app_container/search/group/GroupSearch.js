@@ -20,7 +20,7 @@ class GroupSearch extends Component{
             axios(
                 {
                     method: 'get',
-                    url: 'http://localhost:8000/search/channel',
+                    url: 'https://takunnithan.com/api/search/channel',
                     headers: {
                         'auth-token':localStorage.getItem('auth_token'),
                         'user-id': localStorage.getItem('user_id')

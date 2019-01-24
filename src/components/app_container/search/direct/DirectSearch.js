@@ -20,7 +20,7 @@ class DirectSearch extends Component{
             axios(
                 {
                     method: 'get',
-                    url: 'http://localhost:8000/search/user',
+                    url: 'https://takunnithan.com/api/search/user',
                     headers: {
                         'auth-token':localStorage.getItem('auth_token'),
                         'user-id': localStorage.getItem('user_id')

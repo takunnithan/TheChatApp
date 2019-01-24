@@ -41,7 +41,7 @@ Move the sign up to Redux - Action
 
 
   signupHandler = (e) => {
-    var signup_url = 'http://localhost:8000/signup/';
+    var signup_url = 'https://takunnithan.com/api/signup/';
 
     if (!this.state.username || !this.state.password || !this.state.fullname){
       this.setState({error_message: "Please fill all the fields!"});
