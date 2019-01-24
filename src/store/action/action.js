@@ -172,7 +172,7 @@ export const editMessage = (self)=> {
 
 export const deleteMessage = (self)=> {
     return (dispatch, getState) => {
-        var delete_url = 'http://localhost:8000/messages/' + self.state.message_id +'/';
+        var delete_url = 'https://takunnithan.com/api/messages/' + self.state.message_id +'/';
         axios({
           method: 'delete',
           url: delete_url,
