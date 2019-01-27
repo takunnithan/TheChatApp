@@ -125,9 +125,15 @@ class Message extends Component {
         )
         :(
           <div className={classes.message_container} >
-          <Edit 
+          {
+            this.props.sender === localStorage.getItem('username')
+            ? ( 
+            <Edit 
               editClickHandler={this.editClickHandler}
               onDeleteHandler={this.onDeleteHandler} />
+            ): (null)
+
+          }
             <div className={classes.profile_pic_container}>
             <div className={classes.profile_pic} ><img src={this.props.avatar} alt=''/></div>
             </div>
