@@ -95,14 +95,18 @@ export const loginAction = (self) => {
 export const getMessages = (unique_hash) => {
     return (dispatch, getState) => {
         var data = {}
-        var res_obj = JSON.parse(JSON.stringify(getState().messages));
+        var state = JSON.parse(JSON.stringify(getState()));
+        var res_obj = state.messages;
+        var chat_name = getChannelName(unique_hash, state);
         if (res_obj[unique_hash]){  // Check if messages exist for the hash
             data = {
-                selected_unique_hash: unique_hash
+                selected_unique_hash: unique_hash,
+                selected_chat_name: chat_name
             }
             return dispatch({type: 'SWITCH_CHANNEL', data});
         }
         data['selected_unique_hash'] = unique_hash;
+        data['selected_chat_name'] = chat_name
         axios(
             {
                 method: 'get',
@@ -121,6 +125,17 @@ export const getMessages = (unique_hash) => {
                 dispatch({type: 'GET_MESSAGES', data:data});
         });
     }
+}
+
+export const getChannelName = (unique_hash, state) => {
+    var name = null;
+    if (state.channels[unique_hash]){
+        name = state.channels[unique_hash].group_name
+    }
+    else if  (state.direct_chats[unique_hash]){
+            name = state.direct_chats[unique_hash].username
+        }
+    return name;
 }
 
 /*
@@ -268,10 +283,13 @@ export const createDirectChat = (recipient_id) => {
             }
         ).then(response => {
             var data = {}
-            var direct_chats = JSON.parse(JSON.stringify(getState().direct_chats));
+            var state = JSON.parse(JSON.stringify(getState()));
+            var direct_chats = state.direct_chats;
             var unique_hash = response.data.unique_hash;
+            var selected_chat_name = getChannelName(unique_hash, state)
             var channel = {
-                selected_unique_hash: unique_hash
+                selected_unique_hash: unique_hash,
+                selected_chat_name: selected_chat_name
             }
             if (direct_chats[unique_hash]){
                 dispatch({type: 'SWITCH_CHANNEL', data:channel});
@@ -304,10 +322,13 @@ export const joinChannel = (unique_hash) => {
             }
         ).then(response => {
             var data = {}
-            var channels = JSON.parse(JSON.stringify(getState().channels));
+            var state = JSON.parse(JSON.stringify(getState()));
+            var channels = state.channels;
             var unique_hash = response.data.unique_hash;
+            var selected_chat_name = getChannelName(unique_hash, state);
             var channel = {
-                selected_unique_hash: unique_hash
+                selected_unique_hash: unique_hash,
+                selected_chat_name: selected_chat_name
             }
             if (channels[unique_hash]){
                 dispatch(getMessages(unique_hash));
