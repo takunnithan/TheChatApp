@@ -61,6 +61,8 @@ export const handleResponse = (response, self) => {
             type: 'LOGIN',
             data: {
                 logged_in_user: res_data.username,
+                selected_unique_hash: res_data.personal_chat_hash,
+                selected_chat_name: res_data.username
             }
     }
     } else {
